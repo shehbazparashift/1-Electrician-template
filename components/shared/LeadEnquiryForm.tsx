@@ -606,7 +606,6 @@ const INDUSTRIES: { value: string; label: Translation }[] = [
 const REGEX = {
   phone: /^\+?[0-9\s\-()]{7,20}$/,
   email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-  url: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
 };
 
 const INITIAL_FORM_DATA = {
@@ -618,15 +617,12 @@ const INITIAL_FORM_DATA = {
   industryOther: "",
   service: "", // Stores selected Service ID string locally
   serviceArea: "",
-  hasWebsite: "No",
-  websiteUrl: "",
   message: "",
 };
 
 const INITIAL_FIELD_ERRORS = {
   phone: "",
   email: "",
-  websiteUrl: "",
 };
 
 const fieldWrapClass = "space-y-1.5";
@@ -715,12 +711,6 @@ export default function LeadEnquiryForm({
         nl: "Voer een geldig e-mailadres in",
       });
     }
-    if (name === "websiteUrl" && value && !REGEX.url.test(value)) {
-      nextError = t({
-        en: "Please enter a valid website URL",
-        nl: "Voer een geldige website-URL in",
-      });
-    }
     setFieldErrors((prev) => ({ ...prev, [name]: nextError }));
     return nextError === "";
   };
@@ -730,7 +720,7 @@ export default function LeadEnquiryForm({
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (["phone", "email", "websiteUrl"].includes(name)) {
+    if (["phone", "email"].includes(name)) {
       validateField(name, value);
     }
   };
@@ -740,12 +730,8 @@ export default function LeadEnquiryForm({
     console.log("Submitting form data:", formData);
     const isPhoneValid = validateField("phone", formData.phone);
     const isEmailValid = validateField("email", formData.email);
-    const isUrlValid =
-      formData.hasWebsite === "Yes"
-        ? validateField("websiteUrl", formData.websiteUrl)
-        : true;
 
-    if (!isPhoneValid || !isEmailValid || !isUrlValid) return;
+    if (!isPhoneValid || !isEmailValid) return;
 
     setIsSubmitting(true);
     setError(null);
@@ -768,9 +754,8 @@ export default function LeadEnquiryForm({
       phone: formData.phone,
       businessName: formData.businessName,
       industry: formData.industry,
-      serviceId: numericServiceId, 
+      serviceId: numericServiceId,
       serviceArea: formData.serviceArea,
-      hasWebsite: formData.hasWebsite === "Yes",
       message: formData.message,
       source: "PUBLIC_ENQUIRY",
       tags: selectedServiceName
@@ -780,9 +765,6 @@ export default function LeadEnquiryForm({
 
     if (formData.industry === "Other" && formData.industryOther) {
       payload.industryOther = formData.industryOther;
-    }
-    if (formData.hasWebsite === "Yes" && formData.websiteUrl) {
-      payload.websiteUrl = formData.websiteUrl;
     }
 
     try {
@@ -985,50 +967,6 @@ export default function LeadEnquiryForm({
           </div>
         )}
 
-        <fieldset className="space-y-2 flex flex-col justify-center">
-          <legend className="px-1 text-[12.5px] font-semibold text-[var(--m-fg-muted)] font-sans mb-1">
-            {t({
-              en: "Do you currently have a website?",
-              nl: "Heb je op dit moment een website?",
-            })}
-          </legend>
-          <div className="flex gap-4 items-center">
-            {[
-              { value: "Yes", label: { en: "Yes", nl: "Ja" } },
-              { value: "No", label: { en: "No", nl: "Nee" } },
-            ].map((opt) => (
-              <label
-                key={opt.value}
-                className="flex items-center gap-1.5 cursor-pointer group"
-              >
-                <div className="relative flex items-center justify-center">
-                  <input
-                    type="radio"
-                    name="hasWebsite"
-                    value={opt.value}
-                    checked={formData.hasWebsite === opt.value}
-                    onChange={handleInputChange}
-                    className="sr-only"
-                  />
-                  <div
-                    className={`w-5 h-5 rounded-full border-2 transition-all ${
-                      formData.hasWebsite === opt.value
-                        ? "border-[var(--m-accent)] bg-[var(--m-accent)]"
-                        : "border-[var(--m-border)] bg-white group-hover:border-[var(--m-accent)]"
-                    }`}
-                  />
-                  {formData.hasWebsite === opt.value && (
-                    <div className="absolute w-2 h-2 rounded-full bg-white" />
-                  )}
-                </div>
-                <span className="text-[var(--m-fg-muted)] font-sans text-[13px]">
-                  {t(opt.label)}
-                </span>
-              </label>
-            ))}
-          </div>
-        </fieldset>
-
         <div className={fieldWrapClass}>
           <label htmlFor={fieldId("service")} className={labelClass}>
             {t({ en: "Service", nl: "Dienst" })}
@@ -1064,28 +1002,6 @@ export default function LeadEnquiryForm({
             />
           </div>
         </div>
-
-        {formData.hasWebsite === "Yes" && (
-          <div className={`${fieldWrapClass} lg:col-span-2`}>
-            <label htmlFor={fieldId("websiteUrl")} className={labelClass}>
-              {t({ en: "Website URL", nl: "Website-URL" })}
-            </label>
-            <input
-              id={fieldId("websiteUrl")}
-              required
-              name="websiteUrl"
-              type="text"
-              value={formData.websiteUrl}
-              onChange={handleInputChange}
-              className={`${inputClass} ${
-                fieldErrors.websiteUrl ? errorFieldClass : defaultFieldClass
-              }`}
-            />
-            {fieldErrors.websiteUrl && (
-              <p className={errorTextClass}>{fieldErrors.websiteUrl}</p>
-            )}
-          </div>
-        )}
 
         <div className={`${fieldWrapClass} lg:col-span-2`}>
           <label htmlFor={fieldId("message")} className={labelClass}>
