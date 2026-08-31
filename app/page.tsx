@@ -15,7 +15,7 @@ import FAQSection from "@/components/sections/FAQSection";
 import AppointmentSection from "@/components/sections/AppointmentSection";
 import Footer from "@/components/shared/Footer";
 import FadeUp from "@/components/shared/FadeUp";
-
+// 
 export default function Home() {
   return (
     <main className="w-full bg-white relative">
