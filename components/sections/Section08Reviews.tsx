@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import FadeUp from '@/components/shared/FadeUp';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -21,6 +21,10 @@ type Review = {
 export default function Section08Reviews() {
   const swiperRef = useRef<SwiperType | null>(null);
   const desktopSwiperRef = useRef<SwiperType | null>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const [isDesktopBeginning, setIsDesktopBeginning] = useState(true);
+  const [isDesktopEnd, setIsDesktopEnd] = useState(false);
 
   const reviews: Review[] = [
     {
@@ -113,6 +117,14 @@ export default function Section08Reviews() {
             onBeforeInit={(swiper) => {
               swiperRef.current = swiper;
             }}
+            onSwiper={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+            onSlideChange={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
             speed={600}
             slidesPerView={1}
             spaceBetween={20}
@@ -124,20 +136,22 @@ export default function Section08Reviews() {
           </Swiper>
 
           {/* Carousel Navigation Arrows */}
-          <div className="flex items-center justify-end gap-3 mt-6">
+          <div className="flex items-center justify-center gap-3 mt-6">
             <button
               type="button"
               onClick={() => swiperRef.current?.slidePrev()}
+              disabled={isBeginning}
               aria-label="Previous review"
-              className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm"
+              className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
             >
               <ArrowLeft className="w-4 h-4" strokeWidth={2} />
             </button>
             <button
               type="button"
               onClick={() => swiperRef.current?.slideNext()}
+              disabled={isEnd}
               aria-label="Next review"
-              className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm"
+              className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
             >
               <ArrowRight className="w-4 h-4" strokeWidth={2} />
             </button>
@@ -150,6 +164,14 @@ export default function Section08Reviews() {
             modules={[Navigation]}
             onBeforeInit={(swiper) => {
               desktopSwiperRef.current = swiper;
+            }}
+            onSwiper={(swiper) => {
+              setIsDesktopBeginning(swiper.isBeginning);
+              setIsDesktopEnd(swiper.isEnd);
+            }}
+            onSlideChange={(swiper) => {
+              setIsDesktopBeginning(swiper.isBeginning);
+              setIsDesktopEnd(swiper.isEnd);
             }}
             speed={600}
             slidesPerView={3}
@@ -168,16 +190,18 @@ export default function Section08Reviews() {
           <button
             type="button"
             onClick={() => desktopSwiperRef.current?.slidePrev()}
+            disabled={isDesktopBeginning}
             aria-label="Previous review"
-            className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm"
+            className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
           >
             <ArrowLeft className="w-5 h-5" strokeWidth={2} />
           </button>
           <button
             type="button"
             onClick={() => desktopSwiperRef.current?.slideNext()}
+            disabled={isDesktopEnd}
             aria-label="Next review"
-            className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm"
+            className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
           >
             <ArrowRight className="w-5 h-5" strokeWidth={2} />
           </button>

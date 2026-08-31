@@ -19,7 +19,7 @@ const locations = [
 
 export default function Section10() {
   return (
-    <section className="w-full bg-white m-pad-sm">
+    <section id="locations" className="w-full bg-white m-pad-sm">
       <div className="fix">
         {/* Category Subtitle */}
         <div className="flex items-center gap-2 mb-3">

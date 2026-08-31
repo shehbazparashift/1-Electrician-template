@@ -7,7 +7,7 @@ export default function Section01Hero() {
       {/* Main Hero Container */}
       <main className="w-full fix flex-1 flex flex-col lg:flex-row items-center justify-between gap-12 pt-20 pb-0">
         {/* Left Content Section */}
-        <FadeUp className="flex-1 flex flex-col items-start max-w-2xl pt-4 lg:pt-0">
+        <FadeUp className="flex-1 flex flex-col items-start max-w-2xl pt-12 lg:pt-0">
           {/* Category Tag */}
           <div className="flex items-center gap-2.5 mb-6">
             <span className="w-2 h-2 rounded-full bg-blue-600"></span>

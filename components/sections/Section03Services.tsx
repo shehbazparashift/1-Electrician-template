@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import {
   Asterisk,
@@ -28,6 +28,8 @@ type Service = {
 
 export default function Section03Services() {
   const swiperRef = useRef<SwiperType | null>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const services: Service[] = [
     {
@@ -138,6 +140,14 @@ export default function Section03Services() {
             onBeforeInit={(swiper) => {
               swiperRef.current = swiper;
             }}
+            onSwiper={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+            onSlideChange={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
             speed={600}
             slidesPerView={1}
             spaceBetween={20}
@@ -149,20 +159,22 @@ export default function Section03Services() {
           </Swiper>
 
           {/* Carousel Navigation Arrows */}
-          <div className="flex items-center justify-end gap-3 mt-6">
+          <div className="flex items-center justify-center gap-3 mt-6">
             <button
               type="button"
               onClick={() => swiperRef.current?.slidePrev()}
+              disabled={isBeginning}
               aria-label="Previous service"
-              className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm"
+              className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
             >
               <ArrowLeft className="w-4 h-4" strokeWidth={2} />
             </button>
             <button
               type="button"
               onClick={() => swiperRef.current?.slideNext()}
+              disabled={isEnd}
               aria-label="Next service"
-              className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm"
+              className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
             >
               <ArrowRight className="w-4 h-4" strokeWidth={2} />
             </button>

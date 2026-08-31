@@ -546,10 +546,12 @@ type LeadEnquiryFormProps = {
   onSuccessComplete?: () => void;
   className?: string;
   submitLabel?: Translation;
-  /** Background classes for text inputs/select/textarea. Defaults to the translucent white used in the contact modal. */
+  /** Background classes for text inputs/select/textarea. Only used by the "boxed" fieldVariant. Defaults to the translucent white used in the contact modal. */
   fieldBg?: string;
   /** Background (+ hover) classes for the submit button. Defaults to the shared accent color. */
   submitButtonBg?: string;
+  /** "boxed" (default) matches the contact modal's white rounded fields. "underline" renders transparent fields with just a white bottom border, for use on a solid-color background. */
+  fieldVariant?: "boxed" | "underline";
 };
 
 type ServiceOption = {
@@ -628,9 +630,6 @@ const INITIAL_FIELD_ERRORS = {
 const fieldWrapClass = "space-y-1.5";
 const labelClass =
   "text-[12.5px] font-semibold text-[var(--m-fg-muted)] ml-1 font-sans";
-const errorFieldClass =
-  "border-red-400 bg-red-50/90 focus:border-red-500 focus:ring-red-500/10";
-const defaultFieldClass = "border-[var(--m-border)]";
 const errorTextClass = "text-red-600 text-[11px] font-medium ml-1";
 const DEFAULT_FIELD_BG = "bg-white/85";
 const DEFAULT_SUBMIT_BG =
@@ -643,11 +642,25 @@ export default function LeadEnquiryForm({
   submitLabel,
   fieldBg = DEFAULT_FIELD_BG,
   submitButtonBg = DEFAULT_SUBMIT_BG,
+  fieldVariant = "boxed",
 }: LeadEnquiryFormProps) {
-  const baseFieldClass = `w-full rounded-xl border ${fieldBg} shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(17,17,17,0.03)] outline-none transition-all font-sans text-[14px] text-[var(--m-ink)] placeholder:text-[var(--m-fg-subtle)] focus:bg-white focus:border-[var(--m-accent)] focus:ring-4 focus:ring-[var(--m-accent)]/10`;
-  const inputClass = `${baseFieldClass} h-[44px] px-3.5`;
-  const selectClass = `${baseFieldClass} h-[44px] py-1 pl-3.5 pr-10 appearance-none cursor-pointer`;
-  const textareaClass = `${baseFieldClass} px-3.5 py-3 resize-none`;
+  const isUnderline = fieldVariant === "underline";
+  const baseFieldClass = isUnderline
+    ? `w-full bg-transparent border-0 border-b outline-none transition-all font-sans text-[14px] placeholder:text-white/50 focus:border-white ml-1`
+    : `w-full rounded-xl border ${fieldBg} shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(17,17,17,0.03)] outline-none transition-all font-sans text-[14px] text-[var(--m-ink)] placeholder:text-[var(--m-fg-subtle)] focus:bg-white focus:border-[var(--m-accent)] focus:ring-4 focus:ring-[var(--m-accent)]/10`;
+  const inputClass = isUnderline ? `${baseFieldClass} text-white pb-2` : `${baseFieldClass} h-[44px] px-3.5`;
+  const selectClass = isUnderline
+    ? `${baseFieldClass} text-black pb-2 pr-8 appearance-none cursor-pointer`
+    : `${baseFieldClass} h-[44px] py-1 pl-3.5 pr-10 appearance-none cursor-pointer`;
+  const textareaClass = isUnderline
+    ? `${baseFieldClass} text-white pb-2 resize-none`
+    : `${baseFieldClass} px-3.5 py-3 resize-none`;
+  const errorFieldClass = isUnderline
+    ? "border-red-400"
+    : "border-red-400 bg-red-50/90 focus:border-red-500 focus:ring-red-500/10";
+  const defaultFieldClass = isUnderline
+    ? "border-white/30"
+    : "border-[var(--m-border)]";
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,6 +14,8 @@ import "swiper/css/grid";
 
 export default function Section06OurWork() {
   const swiperRef = useRef<SwiperType | null>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const projects = [
     { id: 1, title: "Modern Architecture Lighting", image: "/Work/work1.jpg" },
@@ -53,16 +55,18 @@ export default function Section06OurWork() {
             <button
               type="button"
               onClick={() => swiperRef.current?.slidePrev()}
+              disabled={isBeginning}
               aria-label="Previous Projects"
-              className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer"
+              className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
             >
               <ArrowLeft className="w-5 h-5" strokeWidth={2} />
             </button>
             <button
               type="button"
               onClick={() => swiperRef.current?.slideNext()}
+              disabled={isEnd}
               aria-label="Next Projects"
-              className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer"
+              className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
             >
               <ArrowRight className="w-5 h-5" strokeWidth={2} />
             </button>
@@ -74,6 +78,14 @@ export default function Section06OurWork() {
   modules={[Navigation, Grid]}
   onBeforeInit={(swiper) => {
     swiperRef.current = swiper;
+  }}
+  onSwiper={(swiper) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  }}
+  onSlideChange={(swiper) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
   }}
   speed={600}
   slidesPerView={1}
@@ -114,20 +126,22 @@ export default function Section06OurWork() {
         </Swiper>
 
         {/* Mobile: Arrow Controls (below cards) */}
-        <div className="flex md:hidden items-center justify-end gap-3 mt-0">
+        <div className="flex md:hidden items-center justify-center gap-3 mt-0">
           <button
             type="button"
             onClick={() => swiperRef.current?.slidePrev()}
+            disabled={isBeginning}
             aria-label="Previous Projects"
-            className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer"
+            className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
           >
             <ArrowLeft className="w-4 h-4" strokeWidth={2} />
           </button>
           <button
             type="button"
             onClick={() => swiperRef.current?.slideNext()}
+            disabled={isEnd}
             aria-label="Next Projects"
-            className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer"
+            className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
           >
             <ArrowRight className="w-4 h-4" strokeWidth={2} />
           </button>

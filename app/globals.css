@@ -71,3 +71,9 @@ html.lenis body {
     margin: auto !important;
   }
 }
+
+/* Give the dropdown list's options some breathing room from the left edge. */
+select option {
+  padding-left: 12px;
+  padding-right: 12px;
+}

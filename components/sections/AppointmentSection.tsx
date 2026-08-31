@@ -32,14 +32,13 @@ export default function AppointmentSection() {
             <div
               style={{
                 "--m-fg-muted": "rgba(255,255,255,0.85)",
-                "--m-border": "rgba(255,255,255,0.3)",
                 "--m-fg-subtle": "#000000",
               } as React.CSSProperties}
             >
               <LeadEnquiryForm
                 idPrefix="appointment"
                 submitLabel={{ en: "Request appointment", nl: "Afspraak aanvragen" }}
-                fieldBg="bg-white"
+                fieldVariant="underline"
                 submitButtonBg="bg-black hover:bg-neutral-900"
               />
             </div>
