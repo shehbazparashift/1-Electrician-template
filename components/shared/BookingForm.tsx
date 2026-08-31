@@ -50,7 +50,7 @@ type SlotsResponse = { slotsByDate?: Record<string, Slot[]>; slots?: Slot[] };
 type Step = "service" | "slot" | "details" | "success";
 
 const API_BASE =
-  "https://api.getgrowthrocket.com/api/v1/public/tenants/meridian-logistics/sites/meridian-logistics";
+  "https://api.getgrowthrocket.com/api/v1/public/tenants/tij/sites/tij";
 
 
 
@@ -726,7 +726,7 @@ function ServiceStep({
                         </div>
                       )}
                       <div
-                        className={`mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-sans text-[12px] ${active ? "text-[var(--m-accent)]/70" : "text-[var(--m-fg-subtle)]"}`}
+                        className={`mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-sans text-[12px] ${active ? "text-[var(--m-accent)]/90" : "text-[var(--m-accent)]"}`}
                       >
                         <span className="inline-flex items-center gap-1">
                           <svg

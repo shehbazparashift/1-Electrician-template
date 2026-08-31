@@ -676,7 +676,7 @@ export default function LeadEnquiryForm({
       setIsLoadingServices(true);
       try {
         const response = await fetch(
-          "https://api.getgrowthrocket.com/api/v1/public/tenants/meridian-logistics/sites/meridian-logistics/bookings/settings"
+          "https://api.getgrowthrocket.com/api/v1/public/tenants/tij/sites/tij/bookings/settings"
         );
         if (response.ok) {
           const resData = await response.json();
@@ -749,8 +749,8 @@ export default function LeadEnquiryForm({
     setIsSubmitting(true);
     setError(null);
 
-    const tenantSlug = "meridian-logistics";
-    const siteSlug = "meridian-logistics";
+    const tenantSlug = "tij";
+    const siteSlug = "tij";
 
     const selectedServiceObj = services.find(
       (s) => String(s.id) === formData.service
