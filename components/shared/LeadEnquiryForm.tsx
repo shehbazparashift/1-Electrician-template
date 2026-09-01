@@ -144,7 +144,8 @@ export default function LeadEnquiryForm({
       setIsLoadingServices(true);
       try {
         const response = await fetch(
-          "https://api.getgrowthrocket.com/api/v1/public/tenants/tij/sites/tij/bookings/settings"
+          // "https://api.getgrowthrocket.com/api/v1/public/tenants/tij/sites/tij/bookings/settings"
+          "https://api.getgrowthrocket.com/api/v1/public/bookings/settings"
         );
         if (response.ok) {
           const resData = await response.json();
