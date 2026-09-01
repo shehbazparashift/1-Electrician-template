@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import FadeUp from '@/components/shared/FadeUp';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -25,6 +25,33 @@ export default function Section08Reviews() {
   const [isEnd, setIsEnd] = useState(false);
   const [isDesktopBeginning, setIsDesktopBeginning] = useState(true);
   const [isDesktopEnd, setIsDesktopEnd] = useState(false);
+
+  const syncSwiperState = (swiper: SwiperType) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+  const syncDesktopSwiperState = (swiper: SwiperType) => {
+    setIsDesktopBeginning(swiper.isBeginning);
+    setIsDesktopEnd(swiper.isEnd);
+  };
+
+  // Safety net: force one re-measure + resync shortly after mount in case
+  // the very first measurement (before layout/fonts/images settle) was off.
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      const mobile = swiperRef.current;
+      if (mobile && !mobile.destroyed) {
+        mobile.update();
+        syncSwiperState(mobile);
+      }
+      const desktop = desktopSwiperRef.current;
+      if (desktop && !desktop.destroyed) {
+        desktop.update();
+        syncDesktopSwiperState(desktop);
+      }
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   const reviews: Review[] = [
     {
@@ -117,14 +144,12 @@ export default function Section08Reviews() {
             onBeforeInit={(swiper) => {
               swiperRef.current = swiper;
             }}
-            onSwiper={(swiper) => {
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
-            onSlideChange={(swiper) => {
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
+            onSwiper={syncSwiperState}
+            onSlideChange={syncSwiperState}
+            onResize={syncSwiperState}
+            onObserverUpdate={syncSwiperState}
+            observer
+            observeParents
             speed={600}
             slidesPerView={1}
             spaceBetween={20}
@@ -165,14 +190,12 @@ export default function Section08Reviews() {
             onBeforeInit={(swiper) => {
               desktopSwiperRef.current = swiper;
             }}
-            onSwiper={(swiper) => {
-              setIsDesktopBeginning(swiper.isBeginning);
-              setIsDesktopEnd(swiper.isEnd);
-            }}
-            onSlideChange={(swiper) => {
-              setIsDesktopBeginning(swiper.isBeginning);
-              setIsDesktopEnd(swiper.isEnd);
-            }}
+            onSwiper={syncDesktopSwiperState}
+            onSlideChange={syncDesktopSwiperState}
+            onResize={syncDesktopSwiperState}
+            onObserverUpdate={syncDesktopSwiperState}
+            observer
+            observeParents
             speed={600}
             slidesPerView={3}
             slidesPerGroup={3}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import {
   Asterisk,
@@ -30,6 +30,23 @@ export default function Section03Services() {
   const swiperRef = useRef<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  const syncSwiperState = (swiper: SwiperType) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
+  // Safety net: force one re-measure + resync shortly after mount in case
+  // the very first measurement (before layout/fonts/images settle) was off.
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      const swiper = swiperRef.current;
+      if (!swiper || swiper.destroyed) return;
+      swiper.update();
+      syncSwiperState(swiper);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   const services: Service[] = [
     {
@@ -65,7 +82,7 @@ export default function Section03Services() {
   ];
 
   const renderServiceCard = (service: Service) => (
-    <div className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm flex flex-col group hover:shadow-md transition-all duration-300">
+    <div className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm flex flex-col group hover:shadow-md transition-all duration-300 h-full">
       {/* Image Container */}
       <div className="relative w-full h-[210px] bg-slate-100 overflow-hidden">
         <Image
@@ -140,14 +157,12 @@ export default function Section03Services() {
             onBeforeInit={(swiper) => {
               swiperRef.current = swiper;
             }}
-            onSwiper={(swiper) => {
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
-            onSlideChange={(swiper) => {
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
+            onSwiper={syncSwiperState}
+            onSlideChange={syncSwiperState}
+            onResize={syncSwiperState}
+            onObserverUpdate={syncSwiperState}
+            observer
+            observeParents
             speed={600}
             slidesPerView={1}
             spaceBetween={20}

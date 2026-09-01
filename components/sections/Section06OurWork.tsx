@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,6 +16,23 @@ export default function Section06OurWork() {
   const swiperRef = useRef<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  const syncSwiperState = (swiper: SwiperType) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
+  // Safety net: force one re-measure + resync shortly after mount in case
+  // the very first measurement (before layout/fonts/images settle) was off.
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      const swiper = swiperRef.current;
+      if (!swiper || swiper.destroyed) return;
+      swiper.update();
+      syncSwiperState(swiper);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   const projects = [
     { id: 1, title: "Modern Architecture Lighting", image: "/Work/work1.jpg" },
@@ -79,14 +96,12 @@ export default function Section06OurWork() {
   onBeforeInit={(swiper) => {
     swiperRef.current = swiper;
   }}
-  onSwiper={(swiper) => {
-    setIsBeginning(swiper.isBeginning);
-    setIsEnd(swiper.isEnd);
-  }}
-  onSlideChange={(swiper) => {
-    setIsBeginning(swiper.isBeginning);
-    setIsEnd(swiper.isEnd);
-  }}
+  onSwiper={syncSwiperState}
+  onSlideChange={syncSwiperState}
+  onResize={syncSwiperState}
+  onObserverUpdate={syncSwiperState}
+  observer
+  observeParents
   speed={600}
   slidesPerView={1}
   slidesPerGroup={1}

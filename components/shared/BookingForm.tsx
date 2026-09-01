@@ -1474,7 +1474,7 @@ function SuccessStep({
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col">
-      <span className="font-sans text-[11px] uppercase tracking-[1px] text-[var(--m-fg-subtle)]">
+      <span className="font-sans text-[11px] uppercase tracking-[1px] text-slate-500">
         {label}
       </span>
       <span className="font-sans font-medium text-[13.5px] text-[var(--m-ink)] mt-0.5">
