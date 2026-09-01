@@ -50,7 +50,7 @@ type SlotsResponse = { slotsByDate?: Record<string, Slot[]>; slots?: Slot[] };
 type Step = "service" | "slot" | "details" | "success";
 
 const API_BASE =
-  "https://api.getgrowthrocket.com/api/v1/public/tenants/tij/sites/tij";
+  "https://api.getgrowthrocket.com/api/v1/public/";
 
 
 
