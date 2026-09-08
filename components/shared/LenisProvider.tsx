@@ -68,5 +68,39 @@ export default function LenisProvider({
     };
   }, []);
 
+  // Route same-page hash links through Lenis instead of the browser's
+  // native (instant, URL-mutating) anchor jump. Anything already handled
+  // upstream (e.g. a modal's own click handler) will have called
+  // preventDefault() before this listener sees the event, so it's skipped here.
+  useEffect(() => {
+    function handleAnchorClick(event: MouseEvent) {
+      if (event.defaultPrevented) return;
+      if (
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const anchor = (event.target as HTMLElement)?.closest?.(
+        "a[href^='#']",
+      );
+      const href = anchor?.getAttribute("href");
+      if (!href || href === "#") return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      event.preventDefault();
+      lenisRef.current?.scrollTo(target as HTMLElement);
+    }
+
+    document.addEventListener("click", handleAnchorClick);
+    return () => document.removeEventListener("click", handleAnchorClick);
+  }, []);
+
   return <>{children}</>;
 }
