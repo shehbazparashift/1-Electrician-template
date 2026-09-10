@@ -10,6 +10,7 @@
   --m-border: #d7e3f5;
   --m-ink: #231f20;
   --m-fg-muted: #5c5851;
+  --m-fg-subtle: #9ca3af;
   --m-gutter: clamp(20px, 5vw, 56px);
 }
 @theme inline {
