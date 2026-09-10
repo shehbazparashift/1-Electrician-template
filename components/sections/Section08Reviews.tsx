@@ -100,7 +100,7 @@ export default function Section08Reviews() {
 
   const renderReviewCard = (review: Review) => (
     <div
-      className={`${review.bgColor} rounded-[24px] p-8 sm:p-10 flex flex-col justify-between min-h-[260px] sm:min-h-[280px] transition-transform duration-300 hover:-translate-y-1`}
+      className={`${review.bgColor} rounded-[24px] p-8 xl:p-10 flex flex-col justify-between min-h-[260px] sm:min-h-[280px] transition-transform duration-300 hover:-translate-y-1`}
     >
       {/* Quote Text */}
       <p className="text-slate-800 text-base sm:text-lg font-medium leading-relaxed">
@@ -138,7 +138,7 @@ export default function Section08Reviews() {
         </FadeUp>
 
         {/* Mobile: Swipeable Carousel */}
-        <div className="md:hidden w-full mb-12">
+        <div className="md:hidden w-full mb-0 lg:mb-12">
           <Swiper
             modules={[Navigation]}
             onBeforeInit={(swiper) => {

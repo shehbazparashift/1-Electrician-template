@@ -61,7 +61,7 @@ export default function Section07Team() {
               </div>
 
               {/* Member Details */}
-              <div className="p-6 bg-[#eff4fe]">
+              <div className="p-5 xl:p-6 bg-[#eff4fe]">
                 <h3 className="text-lg font-semibold text-slate-900 leading-snug">
                   {member.name}
                 </h3>

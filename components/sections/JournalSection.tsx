@@ -62,24 +62,24 @@ export default function JournalSection() {
               {/* Content */}
               <div className="flex flex-col flex-grow items-start">
                 {/* Tag Pill */}
-                <span className="inline-block px-3.5 py-1 text-[12px] font-medium tracking-wider text-blue-600 uppercase border border-blue-100 rounded-full mb-4 bg-blue-50/50">
+                <span className="inline-block px-3.5 py-1 text-[10px] xl:text-[12px] font-medium tracking-wider text-blue-600 uppercase border border-blue-100 rounded-full mb-4 bg-blue-50/50">
                   {post.category}
                 </span>
 
                 {/* Title */}
-                <h3 className="text-[18px] sm:text-[22px] font-medium text-gray-900 leading-snug mb-3 transition-colors">
+                <h3 className="text-[18px] xl:text-[22px] font-medium text-gray-900 leading-snug mb-3 transition-colors">
                   {post.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-[12px] sm:text-[15px] font-light text-gray-500 leading-relaxed mb-6 flex-grow">
+                <p className="text-[12px] lg:text-[13px] xl:text-[15px] font-light text-gray-500 leading-relaxed mb-6 flex-grow">
                   {post.description}
                 </p>
 
                 {/* Action Link */}
                 <a
                   href={post.link}
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-all group-hover:gap-2.5"
+                  className="inline-flex items-center gap-1.5 text-[13px] xl:text-[14px] font-medium text-blue-600 hover:text-blue-700 transition-all group-hover:gap-2.5"
                 >
                   Learn more
                   <ArrowRight className="w-4 h-4" />
