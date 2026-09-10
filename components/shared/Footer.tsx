@@ -18,19 +18,19 @@ const footerColumns: FooterColumn[] = [
   {
     title: "SERVICES",
     links: [
-      { label: "Emergency repairs", href: "#" },
-      { label: "Lighting", href: "#" },
-      { label: "Inspections", href: "#" },
-      { label: "Smart homes", href: "#" },
-      { label: "Commercial", href: "#" },
+      { label: "Emergency repairs", href: "#services" },
+      { label: "Lighting", href: "#services" },
+      { label: "Inspections", href: "#services" },
+      { label: "Smart homes", href: "#services" },
+      { label: "Commercial", href: "#services" },
     ],
   },
   {
     title: "COMPANY",
     links: [
-      { label: "About", href: "#" },
-      { label: "Projects", href: "#" },
-      { label: "Reviews", href: "#" },
+      { label: "About", href: "#about" },
+      { label: "Projects", href: "#our-work" },
+      { label: "Reviews", href: "#reviews" },
       { label: "Careers", href: "#" },
       { label: "Contact", href: "#" },
     ],
@@ -38,17 +38,17 @@ const footerColumns: FooterColumn[] = [
   {
     title: "AREAS",
     links: [
-      { label: "Amsterdam", href: "#" },
-      { label: "Rotterdam", href: "#" },
-      { label: "Utrecht", href: "#" },
-      { label: "The Hague", href: "#" },
-      { label: "Delft", href: "#" },
+      { label: "Amsterdam", href: "#locations" },
+      { label: "Rotterdam", href: "#locations" },
+      { label: "Utrecht", href: "#locations" },
+      { label: "The Hague", href: "#locations" },
+      { label: "Delft", href: "#locations" },
     ],
   },
   {
     title: "SUPPORT",
     links: [
-      { label: "FAQ", href: "#" },
+      { label: "FAQ", href: "#faq" },
       { label: "Privacy policy", href: "#" },
       { label: "Cookie policy", href: "#", isCookiePolicy: true },
       { label: "Terms", href: "#" },

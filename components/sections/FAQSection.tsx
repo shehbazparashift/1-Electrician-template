@@ -41,14 +41,17 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    // Keep at least one item open at all times — clicking the already-open
+    // item is a no-op instead of collapsing it.
+    if (openIndex === index) return;
+    setOpenIndex(index);
   };
 
   return (
-    <section className="w-full bg-white m-pad-sm">
+    <section id="faq" className="w-full bg-white m-pad-sm">
       <div className="fix grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         {/* Left Column: Heading & Subtitle */}
-        <FadeUp className="lg:col-span-5">
+        <FadeUp className="lg:col-span-5 lg:sticky lg:top-28">
           <h2 className="text-[28px] lg:text-[48px] 2xl:text-[56px] leading-[34px] lg:leading-[52px] 2xl:leading-[60px] font-semibold tracking-tight text-gray-900 mb-4">
             Frequently asked questions
           </h2>

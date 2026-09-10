@@ -1,8 +1,9 @@
 
 "use client";
 
-import { Check, ChevronDown, Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { useState, useEffect, type ChangeEvent, type FormEvent } from "react";
+import CustomSelect from "./CustomSelect";
 
 type Translation = { en: string; nl: string };
 function t(entry: Translation): string {
@@ -114,11 +115,11 @@ export default function LeadEnquiryForm({
 }: LeadEnquiryFormProps) {
   const isUnderline = fieldVariant === "underline";
   const baseFieldClass = isUnderline
-    ? `w-full bg-transparent border-0 border-b outline-none transition-all font-sans text-[14px] placeholder:text-white/50 focus:border-white ml-1`
+    ? `w-full bg-transparent border-0 border-b outline-none transition-all font-sans text-[14px] placeholder:text-white/50 ml-1`
     : `w-full rounded-xl border ${fieldBg} shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(17,17,17,0.03)] outline-none transition-all font-sans text-[14px] text-[var(--m-ink)] placeholder:text-[var(--m-fg-subtle)] focus:bg-white focus:border-[var(--m-accent)] focus:ring-4 focus:ring-[var(--m-accent)]/10`;
   const inputClass = isUnderline ? `${baseFieldClass} text-white pb-2` : `${baseFieldClass} h-[44px] px-3.5`;
   const selectClass = isUnderline
-    ? `${baseFieldClass} text-black pb-2 pr-8 appearance-none cursor-pointer`
+    ? `${baseFieldClass} text-white/50 pb-2 pr-8 appearance-none cursor-pointer`
     : `${baseFieldClass} h-[44px] py-1 pl-3.5 pr-10 appearance-none cursor-pointer`;
   const textareaClass = isUnderline
     ? `${baseFieldClass} text-white pb-2 resize-none`
@@ -388,29 +389,21 @@ export default function LeadEnquiryForm({
               nl: "Soort werk / Branche",
             })}
           </label>
-          <div className="relative">
-            <select
-              id={fieldId("industry")}
-              required
-              name="industry"
-              value={formData.industry}
-              onChange={handleInputChange}
-              className={`${selectClass} ${defaultFieldClass}`}
-            >
-              <option value="" disabled>
-                {t({ en: "Select Industry", nl: "Kies een branche" })}
-              </option>
-              {INDUSTRIES.map((ind) => (
-                <option key={ind.value} value={ind.value}>
-                  {t(ind.label)}
-                </option>
-              ))}
-            </select>
-            <ChevronDown
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-black pointer-events-none"
-              size={16}
-            />
-          </div>
+          <CustomSelect
+            id={fieldId("industry")}
+            required
+            value={formData.industry}
+            onChange={(value) =>
+              setFormData((prev) => ({ ...prev, industry: value }))
+            }
+            options={INDUSTRIES.map((ind) => ({
+              value: ind.value,
+              label: t(ind.label),
+            }))}
+            placeholder={t({ en: "Select Industry", nl: "Kies een branche" })}
+            triggerClassName={`${selectClass} ${defaultFieldClass}`}
+            valueClassName={isUnderline ? "text-white" : undefined}
+          />
         </div>
 
         <div className={fieldWrapClass}>
@@ -455,36 +448,26 @@ export default function LeadEnquiryForm({
           <label htmlFor={fieldId("service")} className={labelClass}>
             {t({ en: "Service", nl: "Dienst" })}
           </label>
-          <div className="relative">
-            <select
-              id={fieldId("service")}
-              required
-              name="service"
-              value={formData.service}
-              onChange={handleInputChange}
-              disabled={isLoadingServices}
-              className={`${selectClass} ${defaultFieldClass}`}
-            >
-              <option value="" disabled>
-                {isLoadingServices
-                  ? t({ en: "Loading services...", nl: "Diensten laden..." })
-                  : t({ en: "Select a service", nl: "Kies een dienst" })}
-              </option>
-              {services.map((srv, index) => {
-                const label = srv.name || srv.title || `Service ${index + 1}`;
-                const idValue = String(srv.id ?? index);
-                return (
-                  <option key={srv.id ?? index} value={idValue}>
-                    {label}
-                  </option>
-                );
-              })}
-            </select>
-            <ChevronDown
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-black pointer-events-none"
-              size={16}
-            />
-          </div>
+          <CustomSelect
+            id={fieldId("service")}
+            required
+            disabled={isLoadingServices}
+            value={formData.service}
+            onChange={(value) =>
+              setFormData((prev) => ({ ...prev, service: value }))
+            }
+            options={services.map((srv, index) => ({
+              value: String(srv.id ?? index),
+              label: (srv.name || srv.title || `Service ${index + 1}`) as string,
+            }))}
+            placeholder={
+              isLoadingServices
+                ? t({ en: "Loading services...", nl: "Diensten laden..." })
+                : t({ en: "Select a service", nl: "Kies een dienst" })
+            }
+            triggerClassName={`${selectClass} ${defaultFieldClass}`}
+            valueClassName={isUnderline ? "text-white" : undefined}
+          />
         </div>
 
         <div className={`${fieldWrapClass} lg:col-span-2`}>
