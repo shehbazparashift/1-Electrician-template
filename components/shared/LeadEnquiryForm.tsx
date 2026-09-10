@@ -332,7 +332,7 @@ export default function LeadEnquiryForm({
           />
         </div>
 
-        <div className={`${fieldWrapClass} lg:col-span-2`}>
+        <div className={fieldWrapClass}>
           <label htmlFor={fieldId("service")} className={labelClass}>
             {t({ en: "Service", nl: "Dienst" })}
           </label>
