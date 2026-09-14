@@ -19,6 +19,7 @@ import type { Swiper as SwiperType } from 'swiper';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { FaAsterisk } from 'react-icons/fa';
 
 type Service = {
   title: string;
@@ -52,7 +53,7 @@ export default function Section03Services() {
     {
       title: 'Emergency Electrical Repairs',
       image: '/Services/service1.png',
-      icon: <Asterisk />,
+      icon: <FaAsterisk />,
     },
     {
       title: 'Lighting Installation',
@@ -108,7 +109,7 @@ export default function Section03Services() {
         </div>
 
         {/* Arrow Link */}
-        <div className="mt-4 pt-2">
+        <div className="mt-4 pt-0">
           <a
             href="#"
             data-modal-target="contact"

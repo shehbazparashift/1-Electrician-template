@@ -354,6 +354,7 @@ export default function LeadEnquiryForm({
                 : t({ en: "Select a service", nl: "Kies een dienst" })
             }
             triggerClassName={`${selectClass} ${defaultFieldClass}`}
+            chevronClassName={isUnderline ? "text-white/50" : "text-[var(--m-fg-subtle)]"}
             valueClassName={isUnderline ? "text-white" : undefined}
           />
         </div>

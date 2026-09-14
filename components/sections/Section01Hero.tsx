@@ -22,7 +22,7 @@ export default function Section01Hero() {
           </h1>
 
           {/* Subtitle Description */}
-          <p className="text-slate-500 text-base sm:text-lg leading-relaxed mb-8 max-w-lg">
+          <p className="text-[#6b7280] font-light text-base sm:text-[19px] leading-relaxed mb-8 max-w-lg">
             From emergency electrical repairs to complete installations, our certified electricians keep homes and businesses powered safely across the Netherlands.
           </p>
 
@@ -30,7 +30,7 @@ export default function Section01Hero() {
           <div className="flex flex-wrap items-center gap-4">
             <a
               href="#"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-7 py-3.5 rounded-full transition-all flex items-center gap-2.5 shadow-lg shadow-blue-600/30 hover:shadow-blue-600/40"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-7 py-3.5 rounded-full transition-all flex items-center gap-2.5 shadow-lg shadow-blue-600/30 hover:shadow-blue-600/40"
             >
               <span>Book appointment</span>
               <svg
@@ -49,7 +49,7 @@ export default function Section01Hero() {
             </a>
             <a
               href="#services"
-              className="bg-white hover:bg-slate-50 text-slate-800 font-semibold px-7 py-3.5 rounded-full transition-all border border-slate-200/80 shadow-sm"
+              className="bg-white hover:bg-slate-50 text-[#0a0f1c] font-medium px-7 py-3.5 rounded-full transition-all border border-slate-200/80 shadow-sm"
             >
               Our services
             </a>
@@ -63,21 +63,21 @@ export default function Section01Hero() {
             <img
               src="/Home/HeroImage.webp"
               alt="Certified Electrician"
-              className="w-full h-auto object-contain max-h-[520px] lg:max-h-[600px] drop-shadow-xl"
+              className="w-full h-auto object-contain max-h-[520px] lg:max-h-[600px] drop-shadow-[0_25px_25px_rgba(0,0,0,0.4)]"
             />
 
             {/* Absolute Text Box Badge */}
             <div className="absolute bottom-8 left-2 sm:left-6 bg-white/95 backdrop-blur-md rounded-2xl p-3 px-4 shadow-2xl border border-white/60 flex items-center gap-3.5 z-2">
-              <div className="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center shrink-0">
-                <div className="w-2.5 h-2.5 rounded-full bg-blue-200"></div>
+              <div className="w-5 h-5 rounded-full bg-[#d1e3ff] flex items-center justify-center shrink-0">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#0066ff]"></div>
               </div>
               <div className="flex flex-col">
-                <div className="flex items-center gap-1 font-bold text-slate-900 text-sm sm:text-base leading-tight">
+                <div className="flex items-center gap-1 font-semibold text-slate-900 text-[14px] sm:text-[18px] leading-tight">
                   <span>4.9★</span>
                   <span>·</span>
                   <span>3000+</span>
                 </div>
-                <span className="text-xs text-slate-500 font-medium">
+                <span className="text-[12px] sm:text-[13px] text-[#9ca3af] font-normal">
                   completed jobs
                 </span>
               </div>

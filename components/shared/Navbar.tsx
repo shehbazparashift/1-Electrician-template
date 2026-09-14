@@ -59,9 +59,9 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+          <div className="hidden md:flex items-center gap-8 text-[15px] font-normal text-[#c8c9cc]">
             {NAV_ITEMS.map(({ label, href }) => (
-              <a key={label} href={href} className="hover:text-white transition-colors">
+              <a key={label} href={href} className="hover:text-[#5b91ff] transition-colors">
                 {label}
               </a>
             ))}
@@ -71,7 +71,7 @@ export default function Navbar() {
           <div className="hidden md:block">
             <a
               href="#"
-              className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all inline-block shadow-md hover:shadow-blue-500/25"
+              className="bg-blue-600 hover:bg-blue-500 text-white text-[15px] font-medium px-5 py-2.5 rounded-full transition-all inline-block shadow-md hover:shadow-blue-500/25"
             >
               Book appointment
             </a>

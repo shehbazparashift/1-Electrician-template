@@ -75,8 +75,10 @@ export default function CustomSelect({
 
   const openDropdown = () => {
     if (disabled) return;
-    // Seed the keyboard highlight from the current value.
-    setActiveIndex(Math.max(0, options.findIndex((opt) => opt.value === value)));
+    // Seed the keyboard highlight from the current value — nothing
+    // highlighted yet if no option is selected (matches native <select>,
+    // rather than pre-lighting the first option as if it were hovered).
+    setActiveIndex(options.findIndex((opt) => opt.value === value));
     setIsOpen(true);
   };
 
@@ -147,6 +149,12 @@ export default function CustomSelect({
           onKeyDown={handleListKeyDown}
           className="absolute z-20 mt-1.5 w-full max-h-60 overflow-auto rounded-xl border border-[var(--m-border)] bg-white py-1.5 shadow-[0_18px_40px_-12px_rgba(17,17,17,0.18)] focus:outline-none"
         >
+          <li
+            aria-disabled="true"
+            className="px-3.5 py-2 text-[14px] font-sans text-[var(--m-fg-subtle)] bg-[#f8fafd] cursor-default select-none border-b border-[var(--m-border)] mb-1"
+          >
+            {placeholder}
+          </li>
           {options.map((opt, index) => (
             <li
               key={opt.value}

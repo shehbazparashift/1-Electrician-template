@@ -25,7 +25,7 @@ export default function Section02About() {
 
           {/* Right Paragraph Area */}
           <FadeUp className="max-w-md lg:pt-6" delay={0.1}>
-            <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
+            <p className="text-[#6b7280] font-light text-[14px] sm:text-[17px] leading-relaxed">
               For over fifteen years we've helped homes and businesses with safe, reliable electrical work — from small repairs to complete rewiring, always with certified workmanship and transparent pricing.
             </p>
           </FadeUp>
@@ -59,10 +59,10 @@ export default function Section02About() {
                   <Handshake  />
                 </div>
                 <div>
-                  <h3 className="text-4xl sm:text-5xl font-medium tracking-tight mb-1">
+                  <h3 className="text-[36px] sm:text-[46px] font-medium tracking-tight">
                     15+
                   </h3>
-                  <p className="text-blue-100 text-xs font-normal">
+                  <p className="text-blue-100 text-[12px] sm:text-[14px] font-normal">
                     Years experience
                   </p>
                 </div>
@@ -76,10 +76,10 @@ export default function Section02About() {
                 {/* Checkmark Circle Icon (Material Symbols: task_alt) */}
                <CircleCheckBig className="w-6 h-6 text-blue-600" />
                 <div>
-                  <h3 className="text-3xl sm:text-5xl font-medium tracking-tight text-slate-900 mb-1">
+                  <h3 className="text-[36px] sm:text-[46px] font-medium tracking-tight text-slate-900">
                     3000+
                   </h3>
-                  <p className="text-slate-500 text-xs font-normal">
+                  <p className="text-slate-500 text-[12px] sm:text-[14px] font-normal">
                     Projects completed
                   </p>
                 </div>
@@ -106,10 +106,10 @@ export default function Section02About() {
                   <Clock className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-3xl sm:text-5xl font-medium tracking-tight text-slate-900 mb-1">
+                  <h3 className="text-[36px] sm:text-[46px] font-medium tracking-tight text-slate-900">
                     24/7
                   </h3>
-                  <p className="text-slate-500 text-xs font-normal">
+                  <p className="text-slate-500 text-[12px] sm:text-[14px] font-normal">
                     Emergency service
                   </p>
                 </div>
