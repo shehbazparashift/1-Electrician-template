@@ -151,7 +151,7 @@ export default function CustomSelect({
         >
           <li
             aria-disabled="true"
-            className="px-3.5 py-2 text-[14px] font-sans text-[var(--m-fg-subtle)] bg-[#f8fafd] cursor-default select-none border-b border-[var(--m-border)] mb-1"
+            className="px-3.5 py-1.5 text-[14px] font-sans text-white bg-slate-400 cursor-default select-none mb-1"
           >
             {placeholder}
           </li>
@@ -162,7 +162,7 @@ export default function CustomSelect({
               aria-selected={opt.value === value}
               onMouseEnter={() => setActiveIndex(index)}
               onClick={() => handleSelect(opt.value)}
-              className={`px-3.5 py-2 text-[14px] font-sans text-black cursor-pointer transition-colors ${
+              className={`px-3.5 py-1.5 text-[14px] font-sans text-black cursor-pointer transition-colors ${
                 index === activeIndex
                   ? "bg-[var(--m-accent)] text-white"
                   : opt.value === value
