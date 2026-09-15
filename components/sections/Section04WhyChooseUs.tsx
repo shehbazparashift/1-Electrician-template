@@ -116,7 +116,7 @@ export default function Section04WhyChooseUs() {
               </div>
 
               {/* Main Headline */}
-              <h2 className="text-[28px] lg:text-[40px] xl:text-[48px] leading-[34px] lg:leading-[44px] xl:leading-[52px] font-semibold text-slate-900 tracking-tight">
+              <h2 className="text-[28px] lg:text-[40px] xl:text-[48px] 2xl:text-[56px] leading-[34px] lg:leading-[44px] xl:leading-[52px] font-semibold text-slate-900 tracking-tight">
                 {t.titleBefore}<br />
                 {t.titleMiddle}<span className="text-blue-600">{t.titleHighlight}</span>
               </h2>
@@ -140,30 +140,30 @@ export default function Section04WhyChooseUs() {
             {features.map((item, index) => (
               <div
                 key={index}
-                className="bg-[#f7f8f9] rounded-[28px] p-7 border border-slate-200 flex flex-col justify-between min-h-66 transition-all hover:shadow-sm"
+                className="bg-[#f7f8f9] rounded-[28px] p-5 lg:p-7 border border-slate-200 flex flex-col justify-between min-h-55 lg:min-h-66  transition-all hover:shadow-sm"
               >
                 <div>
                   {/* Circular White Badge */}
-                  <div className="w-13 h-13 rounded-full bg-white flex items-center justify-center border border-slate-200 mb-5">
+                  <div className="w-13 h-13 rounded-full bg-white flex items-center justify-center border border-slate-200 mb-2 lg:mb-5">
                     {item.icon}
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-[22px] font-medium text-[#0a0f1c] mb-2">
+                  <h3 className="text-[18px] lg:text-[20px] xl:text-[22px] font-medium text-[#0a0f1c] mb-2">
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[#6b7280] text-[16px] font-light leading-relaxed">
+                  <p className="text-[#6b7280] text-[12px] lg:text-[14px] xl:text-[16px] font-light leading-relaxed">
                     {item.description}
                   </p>
                 </div>
 
                 {/* Learn More Link */}
-                <div className="mt-5">
+                <div className="mt-1 lg:mt-3 xl:mt-5">
                   <a
                     href="#about"
-                    className="inline-flex items-center gap-1.5 text-[14px] font-medium text-[#06f] hover:text-blue-700 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-[11px] lg:text-[12px] xl:text-[14px] font-medium text-[#06f] hover:text-blue-700 transition-colors"
                   >
                     <span>{t.learnMore}</span>
                     <svg

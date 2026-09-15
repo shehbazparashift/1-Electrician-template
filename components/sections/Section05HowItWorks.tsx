@@ -98,23 +98,23 @@ export default function Section05HowItWorks() {
               >
                 <div>
                   {/* Step Number */}
-                  <div className="text-5xl sm:text-6xl font-light text-[#0066FF] mb-8 tracking-tight">
+                  <div className="text-[48px] lg:text-[56px] xl:text-[60px] font-light text-[#0066FF] mb-0 lg:mb-4 xl:mb-8 tracking-tight">
                     {step.number}
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-medium text-slate-900 mb-3 leading-snug">
+                  <h3 className="text-[16px] lg:text-[18px] xl:text-[20px] font-medium text-slate-900 mb-3 leading-snug">
                     {step.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-slate-400 font-light text-[15px] leading-relaxed min-h-11">
+                  <p className="text-slate-400 font-light text-[12px] lg:text-[13px] xl:text-[15px] leading-relaxed min-h-11">
                     {step.description}
                   </p>
                 </div>
 
                 {/* Circle Arrow Button */}
-                <div className="mt-6">
+                <div className="mt-1 lg:mt-3 xl:mt-6">
                   <button
                     type="button"
                     aria-label={t.learnMoreAbout(step.title)}

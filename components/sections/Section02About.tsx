@@ -96,7 +96,7 @@ export default function Section02About() {
                   <Handshake  />
                 </div>
                 <div>
-                  <h3 className="text-[36px] sm:text-[46px] font-medium tracking-tight">
+                  <h3 className="text-[32px] lg:text-[42px] xl:text-[46px] font-medium tracking-tight">
                     15+
                   </h3>
                   <p className="text-blue-100 text-[12px] sm:text-[14px] font-normal">
@@ -113,7 +113,7 @@ export default function Section02About() {
                 {/* Checkmark Circle Icon (Material Symbols: task_alt) */}
                <CircleCheckBig className="w-6 h-6 text-blue-600" />
                 <div>
-                  <h3 className="text-[36px] sm:text-[46px] font-medium tracking-tight text-slate-900">
+                  <h3 className="text-[32px] lg:text-[42px] xl:text-[46px] font-medium tracking-tight text-slate-900">
                     3000+
                   </h3>
                   <p className="text-slate-500 text-[12px] sm:text-[14px] font-normal">
@@ -143,7 +143,7 @@ export default function Section02About() {
                   <Clock className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-[36px] sm:text-[46px] font-medium tracking-tight text-slate-900">
+                  <h3 className="text-[32px] lg:text-[42px] xl:text-[46px] font-medium tracking-tight text-slate-900">
                     24/7
                   </h3>
                   <p className="text-slate-500 text-[12px] sm:text-[14px] font-normal">

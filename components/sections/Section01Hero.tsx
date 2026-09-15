@@ -44,18 +44,18 @@ export default function Section01Hero() {
           {/* Category Tag */}
           <div className="flex items-center gap-2.5 mb-6">
             <span className="w-2 h-2 rounded-full bg-blue-600"></span>
-            <span className="text-[13px] font-normal tracking-widest text-[#6b7280] uppercase">
+            <span className="text-[12px] xl:text-[13px] font-normal tracking-widest text-[#6b7280] uppercase">
               {t.eyebrow}
             </span>
           </div>
 
           {/* Main Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.12] mb-6">
+          <h1 className="text-[36px] lg:text-[48px] xl:text-[58px] font-semibold tracking-tight text-slate-900 leading-[1.12] mb-6">
             {t.titleBefore}<span className="text-blue-600">{t.titleHighlight}</span>{t.titleAfter}
           </h1>
 
           {/* Subtitle Description */}
-          <p className="text-[#6b7280] font-light text-base sm:text-[19px] leading-relaxed mb-8 max-w-lg">
+          <p className="text-[#6b7280] font-light text-[14px] lg:text-[16px] xl:text-[19px] leading-relaxed mb-8 max-w-lg">
             {t.subtitle}
           </p>
 

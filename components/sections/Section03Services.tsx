@@ -21,6 +21,9 @@ import 'swiper/css/navigation';
 import { FaAsterisk } from 'react-icons/fa';
 import { GrHomeRounded } from 'react-icons/gr';
 import { useLanguage } from '@/components/shared/LanguageProvider';
+import { BiSolidCity } from 'react-icons/bi';
+import { LuListCheck } from 'react-icons/lu';
+import { GoHome } from 'react-icons/go';
 
 type Service = {
   title: string;
@@ -120,17 +123,17 @@ export default function Section03Services() {
     {
       title: t.serviceTitles[3],
       image: '/Services/service4.jpg',
-      icon: <SquareCheckBig className='w-6 h-6'/>,
+      icon: <LuListCheck className='w-6 h-6'/>,
     },
     {
       title: t.serviceTitles[4],
       image: '/Services/service5.jpg',
-      icon: <GrHomeRounded  className='w-5 h-5'/>,
+      icon: <GoHome  className='w-6 h-6'/>,
     },
     {
       title: t.serviceTitles[5],
       image: '/Services/service6.jpg',
-      icon: <Building2 className='w-5 h-5'/>,
+      icon: <BiSolidCity className='w-5 h-5'/>,
     },
   ];
 
