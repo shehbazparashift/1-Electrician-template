@@ -19,6 +19,7 @@ import type { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { FaAsterisk } from 'react-icons/fa';
+import { GrHomeRounded } from 'react-icons/gr';
 
 type Service = {
   title: string;
@@ -52,7 +53,7 @@ export default function Section03Services() {
     {
       title: 'Emergency Electrical Repairs',
       image: '/Services/service1.png',
-      icon: <FaAsterisk />,
+      icon: <FaAsterisk className='w-5 h-5'/>,
     },
     {
       title: 'Lighting Installation',
@@ -76,22 +77,22 @@ export default function Section03Services() {
     {
       title: 'Fuse Box Upgrades',
       image: '/Services/service3.jpg',
-      icon: <Cable />,
+      icon: <Cable className='w-5 h-5'/>,
     },
     {
       title: 'Electrical Inspections',
       image: '/Services/service4.jpg',
-      icon: <SquareCheckBig />,
+      icon: <SquareCheckBig className='w-6 h-6'/>,
     },
     {
       title: 'Smart Home Installation',
       image: '/Services/service5.jpg',
-      icon: <House />,
+      icon: <GrHomeRounded  className='w-5 h-5'/>,
     },
     {
       title: 'Commercial Electrical Work',
       image: '/Services/service6.jpg',
-      icon: <Building2 />,
+      icon: <Building2 className='w-5 h-5'/>,
     },
   ];
 
@@ -111,7 +112,7 @@ export default function Section03Services() {
       {/* Content Container */}
       <div className="relative pt-6 px-6 pb-6 flex-1 flex flex-col justify-between">
         {/* Floating Circle Blue Badge */}
-        <div className="absolute -top-7 left-6 w-13 h-13 rounded-full bg-blue-600 flex items-center justify-center">
+        <div className="absolute -top-7 left-6 w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center">
           {service.icon}
         </div>
 

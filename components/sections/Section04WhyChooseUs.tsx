@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import FadeUp from '@/components/shared/FadeUp';
-import { Award, BadgeCheck, Euro, Zap } from 'lucide-react';
+import { BsLightningCharge } from 'react-icons/bs';
 
 export default function Section04WhyChooseUs() {
   const features = [
@@ -13,7 +13,11 @@ export default function Section04WhyChooseUs() {
         // <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
         //   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
         // </svg>
-        <BadgeCheck className="w-6 h-6 text-blue-500" />
+        // <BadgeCheck className="w-6 h-6 text-blue-500" />
+        <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+          <path d="M12 2.96 15.4 1.5l1.89 3.2 3.61.82-.34 3.69L23 12l-2.44 2.79.34 3.7-3.61.82-1.89 3.2-3.4-1.46-3.4 1.46-1.89-3.2-3.61-.82.34-3.7L1 12l2.44-2.79-.34-3.7 3.61-.82L8.6 1.5 12 2.96z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
       ),
     },
     {
@@ -24,7 +28,8 @@ export default function Section04WhyChooseUs() {
         // <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
         //   <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
         // </svg>
-        <Zap className='w-6 h-6 text-blue-500'/> 
+        // <Zap className='w-6 h-6 text-blue-500'/> 
+        <BsLightningCharge className="w-6 h-6 text-blue-500" />
       ),
     },
     {
@@ -35,7 +40,13 @@ export default function Section04WhyChooseUs() {
         // <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
         //   <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.504-1.125-1.125-1.125h-6.75A1.125 1.125 0 019 15.375V18.75m9 0h-9m0-12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0z" />
         // </svg>
-        <Award className="w-6 h-6 text-blue-500" />
+        // <Award className="w-6 h-6 text-blue-500" />
+        <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="9" r="6" />
+          <path fill="currentColor" stroke="none" d="M12 6l.9 1.8 2 .3-1.4 1.4.3 2L12 10.6l-1.8.9.3-2-1.4-1.4 2-.3z" />
+          <path d="M8.2 13.6L6 22l6-3.5" />
+          <path d="M15.8 13.6L18 22l-6-3.5" />
+        </svg>
       ),
     },
     {
@@ -46,7 +57,12 @@ export default function Section04WhyChooseUs() {
         // <span className="text-blue-600 font-extrabold text-lg leading-none">
         //   €
         // </span>
-        <Euro className="w-6 h-6 text-blue-500" />
+        // <Euro className="w-6 h-6 text-blue-500" />
+        <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+          <path d="M19 6a9 9 0 0 0-14 7 9 9 0 0 0 14 5" />
+          <path d="M4 10h11" />
+          <path d="M4 14h11" />
+        </svg>
       ),
     },
   ];
@@ -92,7 +108,7 @@ export default function Section04WhyChooseUs() {
             {features.map((item, index) => (
               <div
                 key={index}
-                className="bg-[#f6f7f8] rounded-[28px] p-7 border border-slate-200 flex flex-col justify-between min-h-66 transition-all hover:shadow-sm"
+                className="bg-[#f7f8f9] rounded-[28px] p-7 border border-slate-200 flex flex-col justify-between min-h-66 transition-all hover:shadow-sm"
               >
                 <div>
                   {/* Circular White Badge */}
@@ -101,12 +117,12 @@ export default function Section04WhyChooseUs() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2">
+                  <h3 className="text-[22px] font-medium text-[#0a0f1c] mb-2">
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-slate-400 text-[16px] font-light leading-relaxed">
+                  <p className="text-[#6b7280] text-[16px] font-light leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -115,7 +131,7 @@ export default function Section04WhyChooseUs() {
                 <div className="mt-5">
                   <a
                     href="#about"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-[14px] font-medium text-[#06f] hover:text-blue-700 transition-colors"
                   >
                     <span>Learn more</span>
                     <svg
