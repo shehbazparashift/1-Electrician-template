@@ -11,8 +11,52 @@ const NAV_ITEMS = [
   { label: "Contact", href: "#" },
 ] as const;
 
+function LanguageToggle({
+  language,
+  setLanguage,
+}: {
+  language: "en" | "nl";
+  setLanguage: (lang: "en" | "nl") => void;
+}) {
+  return (
+    <div
+      role="group"
+      aria-label="Language"
+      className="inline-flex items-center rounded-lg border border-white/15 bg-white/5 p-0.5"
+    >
+      <button
+        type="button"
+        aria-pressed={language === "en"}
+        aria-label="English"
+        onClick={() => setLanguage("en")}
+        className={`px-2.5 py-[5px] rounded-md font-sans font-semibold text-xs leading-none transition-colors ${
+          language === "en"
+            ? "bg-[#155dfc] text-white cursor-default"
+            : "text-[#c8c9cc] hover:text-[#155dfc] cursor-pointer"
+        }`}
+      >
+        EN
+      </button>
+      <button
+        type="button"
+        aria-pressed={language === "nl"}
+        aria-label="Nederlands"
+        onClick={() => setLanguage("nl")}
+        className={`px-2.5 py-[5px] rounded-md font-sans font-semibold text-xs leading-none transition-colors ${
+          language === "nl"
+            ? "bg-[#155dfc] text-white cursor-default"
+            : "text-[#c8c9cc] hover:text-[#155dfc] cursor-pointer"
+        }`}
+      >
+        NL
+      </button>
+    </div>
+  );
+}
+
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [language, setLanguage] = useState<"en" | "nl">("en");
 
   // Lock background scroll while the drawer is open. Lenis drives its own
   // scroll, so plain overflow:hidden isn't enough — same pattern used by
@@ -68,7 +112,8 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Header Action Button */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3 lg:gap-4">
+            <LanguageToggle language={language} setLanguage={setLanguage} />
             <a
               href="#"
               className="bg-blue-600 hover:bg-blue-500 text-white text-[15px] font-medium px-5 py-2.5 rounded-full transition-all inline-block shadow-md hover:shadow-blue-500/25"
@@ -134,13 +179,16 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <a
-          href="#"
-          onClick={(e) => handleNavClick(e, "#")}
-          className="mt-6 mb-4 w-full text-center bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-3.5 rounded-full transition-all shadow-md"
-        >
-          Book appointment
-        </a>
+        <div className="mt-6 mb-4 flex flex-col items-center gap-4">
+          <LanguageToggle language={language} setLanguage={setLanguage} />
+          <a
+            href="#"
+            onClick={(e) => handleNavClick(e, "#")}
+            className="w-full text-center bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-3.5 rounded-full transition-all shadow-md"
+          >
+            Book appointment
+          </a>
+        </div>
       </aside>
     </>
   );
