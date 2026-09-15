@@ -2,41 +2,85 @@
 import React, { useState } from "react";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import FadeUp from "@/components/shared/FadeUp";
+import { useLanguage } from "@/components/shared/LanguageProvider";
 
 interface FAQItem {
   question: string;
   answer: string;
 }
 
-const faqData: FAQItem[] = [
-  {
-    question: "Do you offer emergency electrical repairs?",
-    answer:
-      "Yes — our emergency line is open day and night, every day of the year. For urgent faults we aim to be at your door within two hours.",
+const CONTENT = {
+  en: {
+    heading: "Frequently asked questions",
+    subtitle:
+      "Everything you need to know about our electrical service and bookings.",
+    faqData: [
+      {
+        question: "Do you offer emergency electrical repairs?",
+        answer:
+          "Yes — our emergency line is open day and night, every day of the year. For urgent faults we aim to be at your door within two hours.",
+      },
+      {
+        question: "Are your electricians certified?",
+        answer:
+          "Yes, all of our electricians are fully licensed, insured, and certified to meet all national safety standard regulations.",
+      },
+      {
+        question: "How much does an electrical inspection cost?",
+        answer:
+          "Our inspection pricing starts at a flat base rate, depending on the property size and complexity. Contact us for a detailed, transparent quote.",
+      },
+      {
+        question: "Do you install EV chargers?",
+        answer:
+          "Yes, we supply and install a full range of residential and commercial EV charging stations tailored to your vehicle and site setup.",
+      },
+      {
+        question: "Can you help with commercial electrical projects?",
+        answer:
+          "Absolutely. We manage everything from complete commercial fit-outs and lighting systems to ongoing maintenance contracts.",
+      },
+    ] as FAQItem[],
   },
-  {
-    question: "Are your electricians certified?",
-    answer:
-      "Yes, all of our electricians are fully licensed, insured, and certified to meet all national safety standard regulations.",
+  nl: {
+    heading: "Veelgestelde vragen",
+    subtitle:
+      "Alles wat je moet weten over onze elektrische dienstverlening en boekingen.",
+    faqData: [
+      {
+        question: "Bieden jullie spoedreparaties voor elektra aan?",
+        answer:
+          "Ja — onze spoedlijn is dag en nacht bereikbaar, elke dag van het jaar. Bij dringende storingen streven we ernaar binnen twee uur bij je voor de deur te staan.",
+      },
+      {
+        question: "Zijn jullie elektriciens gecertificeerd?",
+        answer:
+          "Ja, al onze elektriciens zijn volledig gelicentieerd, verzekerd en gecertificeerd volgens alle nationale veiligheidsnormen.",
+      },
+      {
+        question: "Hoeveel kost een elektrische inspectie?",
+        answer:
+          "Onze inspectieprijzen beginnen bij een vast basistarief, afhankelijk van de grootte en complexiteit van het pand. Neem contact met ons op voor een gedetailleerde, transparante offerte.",
+      },
+      {
+        question: "Installeren jullie laadpalen voor elektrische auto's?",
+        answer:
+          "Ja, we leveren en installeren een volledig assortiment laadstations voor woningen en bedrijven, afgestemd op jouw voertuig en locatie.",
+      },
+      {
+        question: "Kunnen jullie helpen met zakelijke elektrotechnische projecten?",
+        answer:
+          "Absoluut. We verzorgen alles, van complete zakelijke inrichtingen en verlichtingssystemen tot doorlopende onderhoudscontracten.",
+      },
+    ] as FAQItem[],
   },
-  {
-    question: "How much does an electrical inspection cost?",
-    answer:
-      "Our inspection pricing starts at a flat base rate, depending on the property size and complexity. Contact us for a detailed, transparent quote.",
-  },
-  {
-    question: "Do you install EV chargers?",
-    answer:
-      "Yes, we supply and install a full range of residential and commercial EV charging stations tailored to your vehicle and site setup.",
-  },
-  {
-    question: "Can you help with commercial electrical projects?",
-    answer:
-      "Absolutely. We manage everything from complete commercial fit-outs and lighting systems to ongoing maintenance contracts.",
-  },
-];
+} as const;
 
 export default function FAQSection() {
+  const { language } = useLanguage();
+  const t = CONTENT[language];
+  const faqData = t.faqData;
+
   // First item open by default
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -53,10 +97,10 @@ export default function FAQSection() {
         {/* Left Column: Heading & Subtitle */}
         <FadeUp className="lg:col-span-5 lg:sticky lg:top-28">
           <h2 className="text-[28px] lg:text-[48px] 2xl:text-[56px] leading-[34px] lg:leading-[52px] 2xl:leading-[60px] font-semibold tracking-tight text-gray-900 mb-4">
-            Frequently asked questions
+            {t.heading}
           </h2>
           <p className="text-base text-gray-500 max-w-sm leading-relaxed">
-            Everything you need to know about our electrical service and bookings.
+            {t.subtitle}
           </p>
         </FadeUp>
 

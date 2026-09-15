@@ -20,6 +20,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { FaAsterisk } from 'react-icons/fa';
 import { GrHomeRounded } from 'react-icons/gr';
+import { useLanguage } from '@/components/shared/LanguageProvider';
 
 type Service = {
   title: string;
@@ -27,7 +28,44 @@ type Service = {
   icon: React.ReactNode;
 };
 
+const CONTENT = {
+  en: {
+    eyebrow: "What we do",
+    titleBefore: "Electrical services, ",
+    titleHighlight: "done right",
+    learnMore: "Learn more",
+    previousService: "Previous service",
+    nextService: "Next service",
+    serviceTitles: [
+      "Emergency Electrical Repairs",
+      "Lighting Installation",
+      "Fuse Box Upgrades",
+      "Electrical Inspections",
+      "Smart Home Installation",
+      "Commercial Electrical Work",
+    ],
+  },
+  nl: {
+    eyebrow: "Wat wij doen",
+    titleBefore: "Elektrische diensten, ",
+    titleHighlight: "goed gedaan",
+    learnMore: "Meer informatie",
+    previousService: "Vorige dienst",
+    nextService: "Volgende dienst",
+    serviceTitles: [
+      "Spoedreparaties elektra",
+      "Verlichting installeren",
+      "Meterkast upgrades",
+      "Elektrische inspecties",
+      "Slimme woninginstallatie",
+      "Zakelijk elektrawerk",
+    ],
+  },
+} as const;
+
 export default function Section03Services() {
+  const { language } = useLanguage();
+  const t = CONTENT[language];
   const swiperRef = useRef<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -51,12 +89,12 @@ export default function Section03Services() {
 
   const services: Service[] = [
     {
-      title: 'Emergency Electrical Repairs',
+      title: t.serviceTitles[0],
       image: '/Services/service1.png',
       icon: <FaAsterisk className='w-5 h-5'/>,
     },
     {
-      title: 'Lighting Installation',
+      title: t.serviceTitles[1],
       image: '/Services/service2.jpg',
       icon: (
         <svg
@@ -75,22 +113,22 @@ export default function Section03Services() {
       ),
     },
     {
-      title: 'Fuse Box Upgrades',
+      title: t.serviceTitles[2],
       image: '/Services/service3.jpg',
       icon: <Cable className='w-5 h-5'/>,
     },
     {
-      title: 'Electrical Inspections',
+      title: t.serviceTitles[3],
       image: '/Services/service4.jpg',
       icon: <SquareCheckBig className='w-6 h-6'/>,
     },
     {
-      title: 'Smart Home Installation',
+      title: t.serviceTitles[4],
       image: '/Services/service5.jpg',
       icon: <GrHomeRounded  className='w-5 h-5'/>,
     },
     {
-      title: 'Commercial Electrical Work',
+      title: t.serviceTitles[5],
       image: '/Services/service6.jpg',
       icon: <Building2 className='w-5 h-5'/>,
     },
@@ -129,7 +167,7 @@ export default function Section03Services() {
             data-modal-target="contact"
             className="inline-flex items-center gap-1.5 text-[14px] font-medium text-blue-600 hover:text-blue-700 transition-colors"
           >
-            <span>Learn more</span>
+            <span>{t.learnMore}</span>
             <svg
               className="w-3.5 h-3.5"
               fill="none"
@@ -157,11 +195,11 @@ export default function Section03Services() {
           <div className="flex items-center justify-center gap-2 mb-3">
             <span className="w-2 h-2 rounded-full bg-blue-600"></span>
             <span className="text-[13px] font-normal tracking-widest text-[#6b7280] uppercase">
-              WHAT WE DO
+              {t.eyebrow}
             </span>
           </div>
           <h2 className="text-[28px] lg:text-[48px] 2xl:text-[56px] leading-[34px] lg:leading-[52px] 2xl:leading-[60px] font-semibold text-slate-900 tracking-tight lg:whitespace-nowrap">
-            Electrical services, <span className="text-blue-600">done right</span>
+            {t.titleBefore}<span className="text-blue-600">{t.titleHighlight}</span>
           </h2>
         </FadeUp>
 
@@ -194,7 +232,7 @@ export default function Section03Services() {
               type="button"
               onClick={() => swiperRef.current?.slidePrev()}
               disabled={isBeginning}
-              aria-label="Previous service"
+              aria-label={t.previousService}
               className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
             >
               <ArrowLeft className="w-4 h-4" strokeWidth={2} />
@@ -203,7 +241,7 @@ export default function Section03Services() {
               type="button"
               onClick={() => swiperRef.current?.slideNext()}
               disabled={isEnd}
-              aria-label="Next service"
+              aria-label={t.nextService}
               className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
             >
               <ArrowRight className="w-4 h-4" strokeWidth={2} />

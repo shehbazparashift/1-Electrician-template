@@ -1,29 +1,72 @@
+"use client";
+
 import React from 'react';
 import FadeUp from '@/components/shared/FadeUp';
+import { useLanguage } from '@/components/shared/LanguageProvider';
+
+const CONTENT = {
+  en: {
+    eyebrow: "How it works",
+    titleFour: "Four ",
+    titleSimpleSteps: "simple steps",
+    learnMoreAbout: (title: string) => `Learn more about ${title}`,
+    steps: [
+      {
+        number: '01',
+        title: 'Book appointment',
+        description: 'Schedule online or by phone.',
+      },
+      {
+        number: '02',
+        title: 'Inspection',
+        description: 'We assess the issue and explain the solution.',
+      },
+      {
+        number: '03',
+        title: 'Professional repair',
+        description: 'Certified electricians complete the work safely.',
+      },
+      {
+        number: '04',
+        title: 'Power restored',
+        description: 'Everything is tested before we leave.',
+      },
+    ],
+  },
+  nl: {
+    eyebrow: "Hoe het werkt",
+    titleFour: "Vier ",
+    titleSimpleSteps: "eenvoudige stappen",
+    learnMoreAbout: (title: string) => `Meer informatie over ${title}`,
+    steps: [
+      {
+        number: '01',
+        title: 'Afspraak maken',
+        description: 'Plan online of telefonisch.',
+      },
+      {
+        number: '02',
+        title: 'Inspectie',
+        description: 'We beoordelen het probleem en leggen de oplossing uit.',
+      },
+      {
+        number: '03',
+        title: 'Professionele reparatie',
+        description: 'Gecertificeerde elektriciens voeren het werk veilig uit.',
+      },
+      {
+        number: '04',
+        title: 'Stroom hersteld',
+        description: 'Alles wordt getest voordat we vertrekken.',
+      },
+    ],
+  },
+} as const;
 
 export default function Section05HowItWorks() {
-  const steps = [
-    {
-      number: '01',
-      title: 'Book appointment',
-      description: 'Schedule online or by phone.',
-    },
-    {
-      number: '02',
-      title: 'Inspection',
-      description: 'We assess the issue and explain the solution.',
-    },
-    {
-      number: '03',
-      title: 'Professional repair',
-      description: 'Certified electricians complete the work safely.',
-    },
-    {
-      number: '04',
-      title: 'Power restored',
-      description: 'Everything is tested before we leave.',
-    },
-  ];
+  const { language } = useLanguage();
+  const t = CONTENT[language];
+  const steps = t.steps;
 
   return (
     <section className="w-full bg-[#0066FF] m-pad font-sans relative">
@@ -33,12 +76,12 @@ export default function Section05HowItWorks() {
           <div className="flex items-center justify-center gap-2 mb-3">
             <span className="w-2 h-2 rounded-full bg-blue-300"></span>
             <span className="text-xs font-normal tracking-widest text-blue-100 uppercase">
-              HOW IT WORKS
+              {t.eyebrow}
             </span>
           </div>
           <h2 className="text-[28px] lg:text-[48px] 2xl:text-[56px] leading-[34px] lg:leading-[52px] 2xl:leading-[60px] font-semibold tracking-tight">
-            <span className="text-white">Four </span>
-            <span className="text-blue-200/50 font-medium">simple steps</span>
+            <span className="text-white">{t.titleFour}</span>
+            <span className="text-blue-200/50 font-medium">{t.titleSimpleSteps}</span>
           </h2>
         </FadeUp>
 
@@ -51,7 +94,7 @@ export default function Section05HowItWorks() {
             {steps.map((step, index) => (
               <div
                 key={index}
-                className="bg-[#f8fafc] rounded-[32px] p-7 sm:p-8 shadow-lg transition-transform duration-300 hover:-translate-y-1 flex flex-col justify-between"
+                className="group bg-[#f8fafc] rounded-[32px] p-7 sm:p-8 shadow-lg transition-transform duration-300 hover:-translate-y-1 flex flex-col justify-between"
               >
                 <div>
                   {/* Step Number */}
@@ -74,8 +117,8 @@ export default function Section05HowItWorks() {
                 <div className="mt-6">
                   <button
                     type="button"
-                    aria-label={`Learn more about ${step.title}`}
-                    className="w-10 h-10 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors"
+                    aria-label={t.learnMoreAbout(step.title)}
+                    className="w-10 h-10 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center text-slate-600 transition-colors group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600"
                   >
                     <svg
                       className="w-4 h-4"

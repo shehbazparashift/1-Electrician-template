@@ -346,7 +346,7 @@ export default function LeadEnquiryForm({
             }
             options={services.map((srv, index) => ({
               value: String(srv.id ?? index),
-              label: (srv.name || srv.title || `Service ${index + 1}`) as string,
+              label: (srv.name || srv.title || t({ en: `Service ${index + 1}`, nl: `Dienst ${index + 1}` })) as string,
             }))}
             placeholder={
               isLoadingServices

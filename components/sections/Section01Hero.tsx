@@ -35,7 +35,7 @@ export default function Section01Hero() {
   const t = content[language];
 
   return (
-    <div id="home" className="min-h-screen bg-[#e8eef5] text-slate-900 font-sans flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+    <div id="home" className="min-h-screen bg-[#e8eef5] text-slate-900 font-sans flex flex-col justify-between selection:bg-blue-500 selection:text-white overflow-hidden">
 
       {/* Main Hero Container */}
       <main className="w-full fix flex-1 flex flex-col lg:flex-row items-center justify-between gap-12 pt-20 pb-0">

@@ -11,8 +11,58 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/grid";
+import { useLanguage } from "@/components/shared/LanguageProvider";
+
+const CONTENT = {
+  en: {
+    eyebrow: "Our work",
+    titleBefore: "Recently ",
+    titleHighlight: "completed",
+    titleAfter: " projects",
+    previousProjects: "Previous Projects",
+    nextProjects: "Next Projects",
+    projectTitles: [
+      "Modern Architecture Lighting",
+      "Commercial Office Fitout",
+      "Electrical Panel Maintenance",
+      "Smart Home Automation Integration",
+      "Industrial Fabrication & Wiring",
+      "High-Voltage Power Lines Project",
+      "Circuit Diagnostics & Testing",
+      "Modern Office Lighting Setup",
+      "Electrical System Blueprinting",
+      "Control System Programming",
+      "Industrial Automation Diagnostics",
+      "Minimalist Pendant Lighting",
+    ],
+  },
+  nl: {
+    eyebrow: "Ons werk",
+    titleBefore: "Recent ",
+    titleHighlight: "afgeronde",
+    titleAfter: " projecten",
+    previousProjects: "Vorige projecten",
+    nextProjects: "Volgende projecten",
+    projectTitles: [
+      "Moderne architecturale verlichting",
+      "Inrichting zakelijk kantoor",
+      "Onderhoud elektrisch paneel",
+      "Integratie slimme woningautomatisering",
+      "Industriële fabricage & bedrading",
+      "Hoogspanningsleidingen project",
+      "Circuitdiagnose & testen",
+      "Moderne kantoorverlichting",
+      "Blauwdruk elektrisch systeem",
+      "Programmering besturingssysteem",
+      "Diagnose industriële automatisering",
+      "Minimalistische hanglampverlichting",
+    ],
+  },
+} as const;
 
 export default function Section06OurWork() {
+  const { language } = useLanguage();
+  const t = CONTENT[language];
   const swiperRef = useRef<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -34,20 +84,11 @@ export default function Section06OurWork() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  const projects = [
-    { id: 1, title: "Modern Architecture Lighting", image: "/Work/work1.jpg" },
-    { id: 2, title: "Commercial Office Fitout", image: "/Work/work2.jpg" },
-    { id: 3, title: "Electrical Panel Maintenance", image: "/Work/work3.jpg" },
-    { id: 4, title: "Smart Home Automation Integration", image: "/Work/work4.jpg" },
-    { id: 5, title: "Industrial Fabrication & Wiring", image: "/Work/work5.jpg" },
-    { id: 6, title: "High-Voltage Power Lines Project", image: "/Work/work6.jpg" },
-    { id: 7, title: "Circuit Diagnostics & Testing", image: "/Work/work7.jpg" },
-    { id: 8, title: "Modern Office Lighting Setup", image: "/Work/work8.jpg" },
-    { id: 9, title: "Electrical System Blueprinting", image: "/Work/work9.jpg" },
-    { id: 10, title: "Control System Programming", image: "/Work/work10.jpg" },
-    { id: 11, title: "Industrial Automation Diagnostics", image: "/Work/work11.jpg" },
-    { id: 12, title: "Minimalist Pendant Lighting", image: "/Work/work12.jpg" },
-  ];
+  const projects = t.projectTitles.map((title, index) => ({
+    id: index + 1,
+    title,
+    image: `/Work/work${index + 1}.jpg`,
+  }));
 
   return (
     <section id="our-work" className="w-full bg-white m-pad font-sans">
@@ -58,12 +99,12 @@ export default function Section06OurWork() {
             <div className="flex items-center gap-2 mb-3">
               <span className="w-2 h-2 rounded-full bg-blue-600"></span>
               <span className="text-[13px] font-normal tracking-widest text-[#6b7280] uppercase">
-                OUR WORK
+                {t.eyebrow}
               </span>
             </div>
 
             <h2 className="text-[28px] lg:text-[48px] 2xl:text-[56px] leading-[34px] lg:leading-[52px] 2xl:leading-[60px] font-semibold text-slate-900 tracking-tight">
-              Recently <span className="text-blue-600">completed</span> projects
+              {t.titleBefore}<span className="text-blue-600">{t.titleHighlight}</span>{t.titleAfter}
             </h2>
           </div>
 
@@ -73,7 +114,7 @@ export default function Section06OurWork() {
               type="button"
               onClick={() => swiperRef.current?.slidePrev()}
               disabled={isBeginning}
-              aria-label="Previous Projects"
+              aria-label={t.previousProjects}
               className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
             >
               <ArrowLeft className="w-5 h-5" strokeWidth={2} />
@@ -82,7 +123,7 @@ export default function Section06OurWork() {
               type="button"
               onClick={() => swiperRef.current?.slideNext()}
               disabled={isEnd}
-              aria-label="Next Projects"
+              aria-label={t.nextProjects}
               className="w-12 h-12 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
             >
               <ArrowRight className="w-5 h-5" strokeWidth={2} />
@@ -146,7 +187,7 @@ export default function Section06OurWork() {
             type="button"
             onClick={() => swiperRef.current?.slidePrev()}
             disabled={isBeginning}
-            aria-label="Previous Projects"
+            aria-label={t.previousProjects}
             className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
           >
             <ArrowLeft className="w-4 h-4" strokeWidth={2} />
@@ -155,7 +196,7 @@ export default function Section06OurWork() {
             type="button"
             onClick={() => swiperRef.current?.slideNext()}
             disabled={isEnd}
-            aria-label="Next Projects"
+            aria-label={t.nextProjects}
             className="w-11 h-11 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-sm cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-900 disabled:hover:border-slate-200"
           >
             <ArrowRight className="w-4 h-4" strokeWidth={2} />

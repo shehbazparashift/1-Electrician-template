@@ -1,35 +1,82 @@
+"use client";
+
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import FadeUp from "@/components/shared/FadeUp";
+import { useLanguage } from "@/components/shared/LanguageProvider";
 
-const posts = [
-  {
-    category: "MAINTENANCE",
-    title: "Why your circuit breaker keeps tripping",
-    description:
-      "Understand the common causes and when to call an electrician.",
-    image: "/Journal/journal1.jpg",
-    link: "#",
+const CONTENT = {
+  en: {
+    eyebrow: "Journal",
+    titleBefore: "Tips for a ",
+    titleHighlight: "happy home",
+    learnMore: "Learn more",
+    posts: [
+      {
+        category: "MAINTENANCE",
+        title: "Why your circuit breaker keeps tripping",
+        description:
+          "Understand the common causes and when to call an electrician.",
+        image: "/Journal/journal1.jpg",
+        link: "#",
+      },
+      {
+        category: "LIGHTING",
+        title: "The benefits of upgrading to LED lighting",
+        description:
+          "Lower bills, better light and a longer lifespan for every room.",
+        image: "/Journal/journal2.jpg",
+        link: "#",
+      },
+      {
+        category: "SAFETY",
+        title: "Preparing your home for electrical safety",
+        description:
+          "Simple checks to keep your home safe and up to standard.",
+        image: "/Journal/journal3.jpg",
+        link: "#",
+      },
+    ],
   },
-  {
-    category: "LIGHTING",
-    title: "The benefits of upgrading to LED lighting",
-    description:
-      "Lower bills, better light and a longer lifespan for every room.",
-    image: "/Journal/journal2.jpg",
-    link: "#",
+  nl: {
+    eyebrow: "Journaal",
+    titleBefore: "Tips voor een ",
+    titleHighlight: "fijn thuis",
+    learnMore: "Meer informatie",
+    posts: [
+      {
+        category: "ONDERHOUD",
+        title: "Waarom je stroomonderbreker blijft afslaan",
+        description:
+          "Begrijp de meest voorkomende oorzaken en wanneer je een elektricien moet bellen.",
+        image: "/Journal/journal1.jpg",
+        link: "#",
+      },
+      {
+        category: "VERLICHTING",
+        title: "De voordelen van overstappen op LED-verlichting",
+        description:
+          "Lagere rekeningen, beter licht en een langere levensduur voor elke ruimte.",
+        image: "/Journal/journal2.jpg",
+        link: "#",
+      },
+      {
+        category: "VEILIGHEID",
+        title: "Je huis voorbereiden op elektrische veiligheid",
+        description:
+          "Eenvoudige controles om je huis veilig en up-to-date te houden.",
+        image: "/Journal/journal3.jpg",
+        link: "#",
+      },
+    ],
   },
-  {
-    category: "SAFETY",
-    title: "Preparing your home for electrical safety",
-    description:
-      "Simple checks to keep your home safe and up to standard.",
-    image: "/Journal/journal3.jpg",
-    link: "#",
-  },
-];
+} as const;
 
 export default function JournalSection() {
+  const { language } = useLanguage();
+  const t = CONTENT[language];
+  const posts = t.posts;
+
   return (
     <section className="w-full bg-[#f8fafd] m-pad-sm">
       <div className="fix">
@@ -38,11 +85,11 @@ export default function JournalSection() {
           <div className="flex items-center gap-2 mb-3">
             <span className="h-2 w-2 rounded-full bg-blue-600"></span>
             <span className="text-[13px] font-normal tracking-widest text-[#6b7280] uppercase">
-              JOURNAL
+              {t.eyebrow}
             </span>
           </div>
           <h2 className="text-[28px] lg:text-[48px] 2xl:text-[56px] leading-[34px] lg:leading-[52px] 2xl:leading-[60px] font-semibold tracking-tight text-gray-900">
-            Tips for a <span className="text-blue-600">happy home</span>
+            {t.titleBefore}<span className="text-blue-600">{t.titleHighlight}</span>
           </h2>
         </FadeUp>
 
@@ -81,7 +128,7 @@ export default function JournalSection() {
                   href={post.link}
                   className="inline-flex items-center gap-1.5 text-[13px] xl:text-[14px] font-medium text-blue-600 hover:text-blue-700 transition-all group-hover:gap-2.5"
                 >
-                  Learn more
+                  {t.learnMore}
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>

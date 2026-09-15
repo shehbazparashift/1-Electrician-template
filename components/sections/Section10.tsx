@@ -1,23 +1,57 @@
+"use client";
+
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import FadeUp from "@/components/shared/FadeUp";
+import { useLanguage } from "@/components/shared/LanguageProvider";
 
-const locations = [
-  [
-    { name: "Amsterdam", href: "#" },
-    { name: "Rotterdam", href: "#" },
-    { name: "The Hague", href: "#" },
-    { name: "Utrecht", href: "#" },
-  ],
-  [
-    { name: "Eindhoven", href: "#" },
-    { name: "Delft", href: "#" },
-    { name: "Leiden", href: "#" },
-    { name: "Haarlem", href: "#" },
-  ],
-];
+const CONTENT = {
+  en: {
+    eyebrow: "Coverage",
+    titleBefore: "Where we ",
+    titleHighlight: "work",
+    imageAlt: "Where we work location canal view",
+    locations: [
+      [
+        { name: "Amsterdam", href: "#" },
+        { name: "Rotterdam", href: "#" },
+        { name: "The Hague", href: "#" },
+        { name: "Utrecht", href: "#" },
+      ],
+      [
+        { name: "Eindhoven", href: "#" },
+        { name: "Delft", href: "#" },
+        { name: "Leiden", href: "#" },
+        { name: "Haarlem", href: "#" },
+      ],
+    ],
+  },
+  nl: {
+    eyebrow: "Werkgebied",
+    titleBefore: "Waar we ",
+    titleHighlight: "werken",
+    imageAlt: "Locatie waar we werken, uitzicht op een gracht",
+    locations: [
+      [
+        { name: "Amsterdam", href: "#" },
+        { name: "Rotterdam", href: "#" },
+        { name: "Den Haag", href: "#" },
+        { name: "Utrecht", href: "#" },
+      ],
+      [
+        { name: "Eindhoven", href: "#" },
+        { name: "Delft", href: "#" },
+        { name: "Leiden", href: "#" },
+        { name: "Haarlem", href: "#" },
+      ],
+    ],
+  },
+} as const;
 
 export default function Section10() {
+  const { language } = useLanguage();
+  const t = CONTENT[language];
+
   return (
     <section id="locations" className="w-full bg-white m-pad-sm">
       <div className="fix">
@@ -25,14 +59,14 @@ export default function Section10() {
         <div className="flex items-center gap-2 mb-3">
           <span className="h-1.5 w-1.5 rounded-full bg-blue-600"></span>
           <span className="text-[13px] font-normal tracking-wider text-[#6b7280] uppercase">
-            Coverage
+            {t.eyebrow}
           </span>
         </div>
 
         {/* Section Heading */}
         <FadeUp>
           <h2 className="text-[28px] lg:text-[48px] 2xl:text-[56px] leading-[34px] lg:leading-[52px] 2xl:leading-[60px] font-semibold tracking-tight text-gray-900 mb-10">
-            Where we <span className="text-blue-600">work</span>
+            {t.titleBefore}<span className="text-blue-600">{t.titleHighlight}</span>
           </h2>
         </FadeUp>
 
@@ -43,7 +77,7 @@ export default function Section10() {
             <div className="relative w-full h-80 lg:h-full min-h-[320px] rounded-2xl overflow-hidden shadow-sm">
               <img
                 src="/coverage.jpg"
-                alt="Where we work location canal view"
+                alt={t.imageAlt}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -51,7 +85,7 @@ export default function Section10() {
 
           {/* Links Grid Container */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-0">
-            {locations.map((column, colIdx) => (
+            {t.locations.map((column, colIdx) => (
               <div key={colIdx} className="flex flex-col">
                 {column.map((location) => (
                   <a

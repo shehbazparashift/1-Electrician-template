@@ -1,9 +1,46 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import { CircleCheckBig, Clock, Handshake, Star } from 'lucide-react';
 import FadeUp from '@/components/shared/FadeUp';
+import { useLanguage } from '@/components/shared/LanguageProvider';
+
+const CONTENT = {
+  en: {
+    eyebrow: "About Tij",
+    titleBefore: "Trusted electricians, ",
+    titleHighlight: "powered by experience",
+    paragraph:
+      "For over fifteen years we've helped homes and businesses with safe, reliable electrical work — from small repairs to complete rewiring, always with certified workmanship and transparent pricing.",
+    electricianWorkingAlt: "Electrician working",
+    yearsExperience: "Years experience",
+    projectsCompleted: "Projects completed",
+    avatarAlt: "3D Electrician Avatar",
+    emergencyService: "Emergency service",
+    powerLinesAlt: "Power lines sunset",
+    customerRating: "Customer rating",
+  },
+  nl: {
+    eyebrow: "Over Tij",
+    titleBefore: "Betrouwbare elektriciens, ",
+    titleHighlight: "aangedreven door ervaring",
+    paragraph:
+      "Al meer dan vijftien jaar helpen we huizen en bedrijven met veilig, betrouwbaar elektrotechnisch werk — van kleine reparaties tot complete herbedrading, altijd met gecertificeerd vakmanschap en transparante prijzen.",
+    electricianWorkingAlt: "Elektricien aan het werk",
+    yearsExperience: "Jaar ervaring",
+    projectsCompleted: "Projecten voltooid",
+    avatarAlt: "3D elektricien avatar",
+    emergencyService: "Spoedservice",
+    powerLinesAlt: "Stroomlijnen bij zonsondergang",
+    customerRating: "Klantbeoordeling",
+  },
+} as const;
 
 export default function Section02About() {
+  const { language } = useLanguage();
+  const t = CONTENT[language];
+
   return (
     <section id="about" className="w-full bg-white m-pad font-sans">
       <div className="fix">
@@ -14,26 +51,26 @@ export default function Section02About() {
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-blue-600"></span>
               <span className="text-[13px] font-normal tracking-widest text-[#6b7280] uppercase">
-                ABOUT TIJ
+                {t.eyebrow}
               </span>
             </div>
             <h2 className="text-[28px] lg:text-[48px] 2xl:text-[56px] leading-[34px] lg:leading-[52px] 2xl:leading-[60px] font-semibold text-slate-900 tracking-tight">
-              Trusted electricians, <br className="hidden lg:block" />
-              <span className="text-blue-600">powered by experience</span>
+              {t.titleBefore}<br className="hidden lg:block" />
+              <span className="text-blue-600">{t.titleHighlight}</span>
             </h2>
           </FadeUp>
 
           {/* Right Paragraph Area */}
           <FadeUp className="max-w-md lg:pt-6" delay={0.1}>
             <p className="text-[#6b7280] font-light text-[14px] sm:text-[17px] leading-relaxed">
-              For over fifteen years we've helped homes and businesses with safe, reliable electrical work — from small repairs to complete rewiring, always with certified workmanship and transparent pricing.
+              {t.paragraph}
             </p>
           </FadeUp>
         </div>
 
         {/* Bento Grid layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          
+
           {/* Left Column Stack (Span 9) */}
           <div className="lg:col-span-9 flex flex-col gap-6">
             {/* Top Row inside Left Stack */}
@@ -42,7 +79,7 @@ export default function Section02About() {
               <div className="sm:col-span-8 relative h-[250px] rounded-3xl overflow-hidden shadow-sm">
                 <Image
                   src="/About/aboutHero.jpg"
-                  alt="Electrician working"
+                  alt={t.electricianWorkingAlt}
                   fill
                   sizes="(min-width: 1024px) 60vw, 90vw"
                   className="object-cover"
@@ -63,7 +100,7 @@ export default function Section02About() {
                     15+
                   </h3>
                   <p className="text-blue-100 text-[12px] sm:text-[14px] font-normal">
-                    Years experience
+                    {t.yearsExperience}
                   </p>
                 </div>
               </div>
@@ -80,7 +117,7 @@ export default function Section02About() {
                     3000+
                   </h3>
                   <p className="text-slate-500 text-[12px] sm:text-[14px] font-normal">
-                    Projects completed
+                    {t.projectsCompleted}
                   </p>
                 </div>
               </div>
@@ -89,7 +126,7 @@ export default function Section02About() {
               <div className="sm:col-span-4 rounded-3xl flex items-center justify-center overflow-hidden min-h-[220px] relative border border-slate-100">
                 <Image
                   src="/About/manImage.png"
-                  alt="3D Electrician Avatar"
+                  alt={t.avatarAlt}
                   width={200}
                   height={200}
                   className="object-contain translate-y-2"
@@ -110,7 +147,7 @@ export default function Section02About() {
                     24/7
                   </h3>
                   <p className="text-slate-500 text-[12px] sm:text-[14px] font-normal">
-                    Emergency service
+                    {t.emergencyService}
                   </p>
                 </div>
               </div>
@@ -122,7 +159,7 @@ export default function Section02About() {
             {/* Sunset Power Transmission Image Background */}
             <Image
               src="/About/about2.jpg"
-              alt="Power lines sunset"
+              alt={t.powerLinesAlt}
               fill
               sizes="(min-width: 1024px) 25vw, 90vw"
               className="object-cover"
@@ -135,7 +172,7 @@ export default function Section02About() {
               {/* <svg className="w-6 h-6 text-blue-400 fill-none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
               </svg> */}
-              <Star className="w-6 h-6 text-blue-400" />  
+              <Star className="w-6 h-6 text-blue-400" />
             </div>
 
             {/* Bottom Content */}
@@ -145,7 +182,7 @@ export default function Section02About() {
                 <span className="text-3xl sm:text-6xl lg:text-3xl xl:text-6xl text-white">★</span>
               </div>
               <p className="text-slate-300 text-xs font-normal tracking-wide">
-                Customer rating
+                {t.customerRating}
               </p>
             </div>
           </div>

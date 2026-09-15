@@ -18,7 +18,25 @@
       "Bash(node shot10.js)",
       "Bash(node shot11.js)",
       "Bash(node shot12.js)",
-      "Bash(node shot13.js)"
+      "Bash(node shot13.js)",
+      "Bash(node shot14.js)",
+      "Bash(node shot15.js)",
+      "Bash(curl -s http://localhost:3001)",
+      "Bash(curl -s http://localhost:3002)",
+      "Bash(node shot16.js)",
+      "Bash(node shot17.js)",
+      "Bash(node shot18.js)",
+      "Bash(node shot19.js)",
+      "Bash(node shot20.js)",
+      "Bash(node shot21.js)",
+      "Bash(node shot22.js)",
+      "Bash(node shot23.js)",
+      "Bash(which chromium-cli *)",
+      "Read(//c//**)",
+      "Bash(node shot24.js)",
+      "Bash(chromium-cli --session electrician)",
+      "Bash(python3 -c \"import playwright\")",
+      "Bash(node shot25.js)"
     ]
   }
 }

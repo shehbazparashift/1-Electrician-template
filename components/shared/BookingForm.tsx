@@ -1505,6 +1505,7 @@ function SummaryRow({ label, value }: { label: string; value: string }) {
 }
 
 function Spinner({ small = false }: { small?: boolean }) {
+  const { language } = useLanguage();
   const size = small ? 16 : 28;
   return (
     <span
@@ -1515,7 +1516,7 @@ function Spinner({ small = false }: { small?: boolean }) {
         borderColor: "var(--m-border)",
         borderTopColor: "var(--m-accent)",
       }}
-      aria-label="Loading"
+      aria-label={language === "nl" ? "Laden" : "Loading"}
     />
   );
 }

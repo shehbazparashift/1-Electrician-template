@@ -8,10 +8,12 @@ const CONTENT = {
   en: {
     heading: "Submit an Enquiry",
     subtitle: "Fill in your details and we'll confirm your booking within the hour.",
+    imageAlt: "Electrician performing maintenance",
   },
   nl: {
     heading: "Stuur een aanvraag",
     subtitle: "Vul je gegevens in en we bevestigen je boeking binnen het uur.",
+    imageAlt: "Elektricien voert onderhoud uit",
   },
 } as const;
 
@@ -25,7 +27,7 @@ export default function AppointmentSection() {
         <div className="w-full h-[400px] lg:h-auto min-h-[450px] rounded-3xl overflow-hidden shadow-sm">
           <img
             src="/ReqApp.jpg"
-            alt="Electrician performing maintenance"
+            alt={t.imageAlt}
             className="w-full h-full object-cover"
           />
         </div>

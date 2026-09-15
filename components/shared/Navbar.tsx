@@ -24,10 +24,11 @@ function LanguageToggle({
   language: "en" | "nl";
   setLanguage: (lang: "en" | "nl") => void;
 }) {
+  const groupLabel = language === "nl" ? "Taal" : "Language";
   return (
     <div
       role="group"
-      aria-label="Language"
+      aria-label={groupLabel}
       className="inline-flex items-center rounded-lg border border-white/15 bg-white/5 p-0.5"
     >
       <button

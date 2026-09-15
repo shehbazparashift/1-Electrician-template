@@ -1,12 +1,12 @@
 "use client";
 
 import { useModal } from "./ModalContext";
-
-type Translation = { en: string; nl: string };
-function t(entry: Translation): string { return entry.en; }
+import { useLanguage } from "./LanguageProvider";
 
 export default function StickyActions() {
   const { openBooking, openContact } = useModal();
+  const { language } = useLanguage();
+  const t = (entry: { en: string; nl: string }) => entry[language];
 
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-[200] flex bg-[#f8fafd]/90 backdrop-blur-md border-t border-[var(--m-border)] shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">

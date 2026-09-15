@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useMemo, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, type ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 export type Language = "en" | "nl";
@@ -23,6 +23,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   };
 
   const value = useMemo(() => ({ language, setLanguage }), [language]);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
 
   return (
     <LanguageContext.Provider value={value}>

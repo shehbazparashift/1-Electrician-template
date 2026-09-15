@@ -3,10 +3,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 
 type Translation = { en: string; nl: string };
-function t(entry: Translation): string { return entry.en; }
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { lenisStart, lenisStop } from "./LenisProvider";
+import { useLanguage } from "./LanguageProvider";
 
 export const COOKIE_CONSENT_NAME = "gr_cookie_consent";
 export const COOKIE_CONSENT_EVENT = "gr-cookie-consent-changed";
@@ -108,17 +108,19 @@ function Toggle({
   onChange,
   disabled,
   id,
+  label,
 }: {
   checked: boolean;
   onChange?: (v: boolean) => void;
   disabled?: boolean;
   id: string;
+  label: string;
 }) {
   return (
     <button
       role="switch"
       aria-checked={checked}
-      aria-label={id}
+      aria-label={label}
       id={id}
       disabled={disabled}
       onClick={() => onChange?.(!checked)}
@@ -175,6 +177,7 @@ function CategoryRow({
       </div>
       <Toggle
         id={id}
+        label={label}
         checked={checked}
         onChange={onChange}
         disabled={disabled}
@@ -197,6 +200,8 @@ function PreferencesPanel({
   onAcceptAll: () => void;
   onClose: () => void;
 }) {
+  const { language } = useLanguage();
+  const t = useCallback((entry: Translation) => entry[language], [language]);
   const set = (key: keyof Prefs) => (v: boolean) =>
     onPrefsChange({ ...prefs, [key]: v });
 
@@ -305,6 +310,8 @@ function PreferencesPanel({
 
 // ── Main component ────────────────────────────────────────────────────────────
 export default function CookieConsent() {
+  const { language } = useLanguage();
+  const t = useCallback((entry: Translation) => entry[language], [language]);
   const [bannerOpen, setBannerOpen] = useState(false);
   const [panelOpen, setPanelOpen] = useState(false);
   const [prefs, setPrefs] = useState<Prefs>(DEFAULT_PREFS);
@@ -384,7 +391,7 @@ export default function CookieConsent() {
             transition={{ type: "spring", duration: 0.5, bounce: 0.22 }}
             role="dialog"
             aria-live="polite"
-            aria-label="Cookie consent"
+            aria-label={t({ en: "Cookie consent", nl: "Cookietoestemming" })}
             // Desktop: bottom-right card. Mobile: above the 52px sticky bar.
             className="fixed z-[1500] left-4 right-4 bottom-[64px] sm:bottom-6 sm:left-auto sm:right-6 sm:w-[420px]"
           >
@@ -459,7 +466,7 @@ export default function CookieConsent() {
         href="https://wa.me/31857444176"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
+        aria-label={t({ en: "Chat on WhatsApp", nl: "Chat via WhatsApp" })}
         // Desktop: bottom-right. Mobile: above the 52px sticky bar.
         className="fixed z-[1400] bottom-[64px] right-4 sm:bottom-6 sm:right-6 group w-12 h-12 rounded-full flex items-center justify-center shadow-lg shadow-[var(--m-accent)]/25 transition-transform hover:scale-110 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--m-accent)]"
         style={{ background: "var(--m-accent)" }}
