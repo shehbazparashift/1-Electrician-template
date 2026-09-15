@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { lenisStart, lenisStop } from "./LenisProvider";
+import { useLanguage } from "./LanguageProvider";
 
 const NAV_ITEMS = [
   { label: "Home", href: "#home" },
@@ -56,7 +57,7 @@ function LanguageToggle({
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [language, setLanguage] = useState<"en" | "nl">("en");
+  const { language, setLanguage } = useLanguage();
 
   // Lock background scroll while the drawer is open. Lenis drives its own
   // scroll, so plain overflow:hidden isn't enough — same pattern used by

@@ -15,14 +15,17 @@ import FAQSection from "@/components/sections/FAQSection";
 import AppointmentSection from "@/components/sections/AppointmentSection";
 import Footer from "@/components/shared/Footer";
 import FadeUp from "@/components/shared/FadeUp";
-// 
+import { LanguageProvider } from "@/components/shared/LanguageProvider";
+//
 export default function Home() {
   return (
     <main className="w-full bg-white relative">
-      <Navbar />
-      <FadeUp className="w-full">
-        <Section01Hero />
-      </FadeUp>
+      <LanguageProvider>
+        <Navbar />
+        <FadeUp className="w-full">
+          <Section01Hero />
+        </FadeUp>
+      </LanguageProvider>
       <FadeUp className="w-full">
         <Section02About />
       </FadeUp>

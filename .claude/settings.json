@@ -4,7 +4,9 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000 --max-time 3)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001 --max-time 5)",
       "Bash(chromium-cli --session hero)",
-      "Bash(curl -s http://localhost:3000 -o /dev/null -w \"%{http_code}\\\\n\")"
+      "Bash(curl -s http://localhost:3000 -o /dev/null -w \"%{http_code}\\\\n\")",
+      "Bash(nohup npm run dev)",
+      "Bash(echo \"started, pid: $!\")"
     ]
   }
 }
