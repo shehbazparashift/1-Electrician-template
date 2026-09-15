@@ -6,7 +6,9 @@
       "Bash(chromium-cli --session hero)",
       "Bash(curl -s http://localhost:3000 -o /dev/null -w \"%{http_code}\\\\n\")",
       "Bash(nohup npm run dev)",
-      "Bash(echo \"started, pid: $!\")"
+      "Bash(echo \"started, pid: $!\")",
+      "Bash(tasklist //FI \"IMAGENAME eq node.exe\" //FO CSV)",
+      "Bash(node shot8.js)"
     ]
   }
 }

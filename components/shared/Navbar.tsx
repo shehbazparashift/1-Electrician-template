@@ -123,32 +123,35 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile Hamburger Button */}
-          <button
-            type="button"
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            className="md:hidden p-2 -mr-2 flex items-center justify-center"
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-          >
-            <div className="w-5 h-4 relative flex flex-col justify-between">
-              <span
-                className={`w-full h-0.5 rounded-full bg-white transition-all duration-300 ${
-                  isMobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""
-                }`}
-              />
-              <span
-                className={`w-full h-0.5 rounded-full bg-white transition-opacity duration-200 ${
-                  isMobileMenuOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`w-full h-0.5 rounded-full bg-white transition-all duration-300 ${
-                  isMobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""
-                }`}
-              />
-            </div>
-          </button>
+          {/* Mobile Language Toggle + Hamburger Button */}
+          <div className="flex md:hidden items-center gap-3">
+            <LanguageToggle language={language} setLanguage={setLanguage} />
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="p-2 -mr-2 flex items-center justify-center"
+              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              <div className="w-5 h-4 relative flex flex-col justify-between">
+                <span
+                  className={`w-full h-0.5 rounded-full bg-white transition-all duration-300 ${
+                    isMobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""
+                  }`}
+                />
+                <span
+                  className={`w-full h-0.5 rounded-full bg-white transition-opacity duration-200 ${
+                    isMobileMenuOpen ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`w-full h-0.5 rounded-full bg-white transition-all duration-300 ${
+                    isMobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""
+                  }`}
+                />
+              </div>
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -180,16 +183,13 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="mt-6 mb-4 flex flex-col items-center gap-4">
-          <LanguageToggle language={language} setLanguage={setLanguage} />
-          <a
-            href="#"
-            onClick={(e) => handleNavClick(e, "#")}
-            className="w-full text-center bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-3.5 rounded-full transition-all shadow-md"
-          >
-            Book appointment
-          </a>
-        </div>
+        <a
+          href="#"
+          onClick={(e) => handleNavClick(e, "#")}
+          className="mt-6 mb-4 w-full text-center bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-3.5 rounded-full transition-all shadow-md"
+        >
+          Book appointment
+        </a>
       </aside>
     </>
   );
