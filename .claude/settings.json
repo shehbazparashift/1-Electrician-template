@@ -8,7 +8,17 @@
       "Bash(nohup npm run dev)",
       "Bash(echo \"started, pid: $!\")",
       "Bash(tasklist //FI \"IMAGENAME eq node.exe\" //FO CSV)",
-      "Bash(node shot8.js)"
+      "Bash(node shot8.js)",
+      "Bash(curl -s http://localhost:3001 -o /dev/null -w \"%{http_code}\\\\n\")",
+      "Bash(curl -s http://localhost:3001/nl -o /dev/null -w \"%{http_code}\\\\n\")",
+      "Bash(curl -s http://localhost:3001/nl)",
+      "Bash(curl -s http://localhost:3001/ -o /dev/null -w \"root: %{http_code}\\\\n\")",
+      "Bash(curl -s http://localhost:3001/nl -o /dev/null -w \"nl: %{http_code}\\\\n\")",
+      "Bash(node shot9.js)",
+      "Bash(node shot10.js)",
+      "Bash(node shot11.js)",
+      "Bash(node shot12.js)",
+      "Bash(node shot13.js)"
     ]
   }
 }

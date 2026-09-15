@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useMemo, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 export type Language = "en" | "nl";
 
@@ -12,9 +13,19 @@ type LanguageContextValue = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en");
+  const pathname = usePathname();
+  const router = useRouter();
+  const language: Language = pathname?.startsWith("/nl") ? "nl" : "en";
+
+  const setLanguage = (lang: Language) => {
+    if (lang === language) return;
+    router.push(lang === "nl" ? "/nl" : "/", { scroll: false });
+  };
+
+  const value = useMemo(() => ({ language, setLanguage }), [language]);
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );

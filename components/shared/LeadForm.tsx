@@ -5,9 +5,9 @@ import { X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import LeadEnquiryForm from "./LeadEnquiryForm";
 import { lenisStart, lenisStop } from "./LenisProvider";
+import { useLanguage } from "./LanguageProvider";
 
 type Translation = { en: string; nl: string };
-function t(entry: Translation): string { return entry.en; }
 
 interface LeadFormProps {
   isOpen: boolean;
@@ -15,6 +15,8 @@ interface LeadFormProps {
 }
 
 export default function LeadForm({ isOpen, onClose }: LeadFormProps) {
+  const { language } = useLanguage();
+  const t = useCallback((entry: Translation) => entry[language], [language]);
   const [isSuccess, setIsSuccess] = useState(false);
   const handleClose = useCallback(() => {
     setIsSuccess(false);

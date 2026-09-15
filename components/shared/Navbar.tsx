@@ -5,12 +5,17 @@ import { lenisStart, lenisStop } from "./LenisProvider";
 import { useLanguage } from "./LanguageProvider";
 
 const NAV_ITEMS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Locations", href: "#locations" },
-  { label: "Contact", href: "#" },
+  { id: "home", href: "#home", en: "Home", nl: "Home" },
+  { id: "about", href: "#about", en: "About", nl: "Over ons" },
+  { id: "services", href: "#services", en: "Services", nl: "Diensten" },
+  { id: "locations", href: "#locations", en: "Locations", nl: "Locaties" },
+  { id: "contact", href: "#", en: "Contact", nl: "Contact" },
 ] as const;
+
+const NAVBAR_TEXT = {
+  en: { bookAppointment: "Book appointment", toggleMenu: "Toggle menu" },
+  nl: { bookAppointment: "Afspraak maken", toggleMenu: "Menu wisselen" },
+} as const;
 
 function LanguageToggle({
   language,
@@ -58,6 +63,7 @@ function LanguageToggle({
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
+  const t = NAVBAR_TEXT[language];
 
   // Lock background scroll while the drawer is open. Lenis drives its own
   // scroll, so plain overflow:hidden isn't enough — same pattern used by
@@ -105,9 +111,9 @@ export default function Navbar() {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-8 text-[15px] font-normal text-[#c8c9cc]">
-            {NAV_ITEMS.map(({ label, href }) => (
-              <a key={label} href={href} className="hover:text-[#5b91ff] transition-colors">
-                {label}
+            {NAV_ITEMS.map(({ id, href, ...labels }) => (
+              <a key={id} href={href} className="hover:text-[#5b91ff] transition-colors">
+                {labels[language]}
               </a>
             ))}
           </div>
@@ -119,7 +125,7 @@ export default function Navbar() {
               href="#"
               className="bg-blue-600 hover:bg-blue-500 text-white text-[15px] font-medium px-5 py-2.5 rounded-full transition-all inline-block shadow-md hover:shadow-blue-500/25"
             >
-              Book appointment
+              {t.bookAppointment}
             </a>
           </div>
 
@@ -130,7 +136,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               className="p-2 -mr-2 flex items-center justify-center"
-              aria-label="Toggle menu"
+              aria-label={t.toggleMenu}
               aria-expanded={isMobileMenuOpen}
             >
               <div className="w-5 h-4 relative flex flex-col justify-between">
@@ -171,14 +177,14 @@ export default function Navbar() {
         }`}
       >
         <nav className="flex flex-col gap-1 text-lg font-medium">
-          {NAV_ITEMS.map(({ label, href }) => (
+          {NAV_ITEMS.map(({ id, href, ...labels }) => (
             <a
-              key={label}
+              key={id}
               href={href}
               onClick={(e) => handleNavClick(e, href)}
               className="py-3 border-b border-white/10 text-slate-300 hover:text-white transition-colors"
             >
-              {label}
+              {labels[language]}
             </a>
           ))}
         </nav>
@@ -188,7 +194,7 @@ export default function Navbar() {
           onClick={(e) => handleNavClick(e, "#")}
           className="mt-6 mb-4 w-full text-center bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-3.5 rounded-full transition-all shadow-md"
         >
-          Book appointment
+          {t.bookAppointment}
         </a>
       </aside>
     </>

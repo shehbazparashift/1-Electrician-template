@@ -32,9 +32,18 @@ const BOOKING_TRIGGER_LABELS = [
   "book an appointment",
   "book a service",
   "reserve your chair",
+  // Dutch (nl) equivalents rendered when the language toggle is set to NL
+  "afspraak maken",
+  "afspraak aanvragen",
+  "boek een afspraak",
 ];
 
-const CONTACT_TRIGGER_LABELS = ["contact", "contact us"];
+const CONTACT_TRIGGER_LABELS = [
+  "contact",
+  "contact us",
+  // Dutch (nl) equivalent
+  "neem contact op",
+];
 
 function normalizeTriggerLabel(label: string) {
   return label

@@ -2,8 +2,22 @@
 import React from "react";
 import FadeUp from "@/components/shared/FadeUp";
 import LeadEnquiryForm from "@/components/shared/LeadEnquiryForm";
+import { useLanguage } from "@/components/shared/LanguageProvider";
+
+const CONTENT = {
+  en: {
+    heading: "Submit an Enquiry",
+    subtitle: "Fill in your details and we'll confirm your booking within the hour.",
+  },
+  nl: {
+    heading: "Stuur een aanvraag",
+    subtitle: "Vul je gegevens in en we bevestigen je boeking binnen het uur.",
+  },
+} as const;
 
 export default function AppointmentSection() {
+  const { language } = useLanguage();
+  const t = CONTENT[language];
   return (
     <section className="w-full bg-[#f8fafd] m-pad-sm">
       <div className="fix grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-8 items-stretch">
@@ -21,11 +35,10 @@ export default function AppointmentSection() {
           <div>
             <FadeUp>
               <h2 className="text-[28px] lg:text-[36px] 2xl:text-[40px] leading-[34px] lg:leading-[42px] 2xl:leading-[46px] font-semibold tracking-tight mb-2 xl:whitespace-nowrap">
-                {/* Request an appointment */}
-                Submit an Enquiry
+                {t.heading}
               </h2>
               <p className="text-blue-100/80 text-sm mb-10 font-light">
-                Fill in your details and we'll confirm your booking within the hour.
+                {t.subtitle}
               </p>
             </FadeUp>
 

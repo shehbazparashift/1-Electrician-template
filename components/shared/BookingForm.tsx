@@ -3,10 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/shared/Button";
 import { lenisStart, lenisStop } from "./LenisProvider";
+import { useLanguage } from "./LanguageProvider";
 
 type Translation = { en: string; nl: string };
-function t(entry: Translation): string { return entry.en; }
-const locale: string = "en";
 
 interface BookingFormProps {
   isOpen: boolean;
@@ -82,27 +81,33 @@ function formatPrice(priceMinor?: number | null, currency?: string | null) {
     return `${value.toFixed(2)} ${currency ?? ""}`.trim();
   }
 }
-function formatDateLong(key: string) {
-  return dateFromKey(key).toLocaleDateString(undefined, {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  });
+function formatDateLong(key: string, locale: string = "en") {
+  return dateFromKey(key).toLocaleDateString(
+    locale === "nl" ? "nl-NL" : "en-US",
+    {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    },
+  );
 }
-function formatDateShort(key: string) {
-  return dateFromKey(key).toLocaleDateString(undefined, {
-    month: "short",
-    day: "numeric",
-  });
+function formatDateShort(key: string, locale: string = "en") {
+  return dateFromKey(key).toLocaleDateString(
+    locale === "nl" ? "nl-NL" : "en-US",
+    {
+      month: "short",
+      day: "numeric",
+    },
+  );
 }
-function formatSingleTime(iso: string, local?: string) {
+function formatSingleTime(iso: string, local?: string, locale: string = "en") {
   if (local) {
     const t = local.split("T")[1] ?? "";
     const hhmm = t.slice(0, 5);
-    if (hhmm) return formatHHMM(hhmm);
+    if (hhmm) return formatHHMM(hhmm, locale);
   }
   try {
-    return new Date(iso).toLocaleTimeString(undefined, {
+    return new Date(iso).toLocaleTimeString(locale === "nl" ? "nl-NL" : "en-US", {
       hour: "numeric",
       minute: "2-digit",
     });
@@ -110,17 +115,17 @@ function formatSingleTime(iso: string, local?: string) {
     return iso;
   }
 }
-function formatTimeFromStartsAt(slot: Slot) {
-  return `${formatSingleTime(slot.startsAt, slot.startsAtLocal)} - ${formatSingleTime(slot.endsAt, slot.endsAtLocal)}`;
+function formatTimeFromStartsAt(slot: Slot, locale: string = "en") {
+  return `${formatSingleTime(slot.startsAt, slot.startsAtLocal, locale)} - ${formatSingleTime(slot.endsAt, slot.endsAtLocal, locale)}`;
 }
-function formatHHMM(hhmm: string) {
+function formatHHMM(hhmm: string, locale: string = "en") {
   const [hStr, mStr] = hhmm.split(":");
-  let h = Number(hStr);
+  const h = Number(hStr);
   const m = mStr ?? "00";
+  if (locale === "nl") return `${String(h).padStart(2, "0")}:${m}`;
   const ampm = h >= 12 ? "PM" : "AM";
-  h = h % 12;
-  if (h === 0) h = 12;
-  return `${h}:${m} ${ampm}`;
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return `${h12}:${m} ${ampm}`;
 }
 function isSlotAvailable(slot: Slot): boolean {
   if (typeof slot.isAvailable === "boolean") return slot.isAvailable;
@@ -133,6 +138,11 @@ function stepIndex(s: Step): number {
 }
 
 export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
+  const { language: locale } = useLanguage();
+  const t = useCallback(
+    (entry: Translation) => entry[locale],
+    [locale],
+  );
   const [settings, setSettings] = useState<Settings | null>(null);
   const [services, setServices] = useState<Service[]>([]);
   const [serviceId, setServiceId] = useState<number | null>(null);
@@ -664,6 +674,8 @@ function ServiceStep({
   onServiceChange: (id: number) => void;
   onContinue: () => void;
 }) {
+  const { language: locale } = useLanguage();
+  const t = useCallback((entry: Translation) => entry[locale], [locale]);
   return (
     <div className="flex flex-col gap-4 justify-between flex-1">
       {loading && (
@@ -827,6 +839,8 @@ function SlotStep({
   onBack: () => void;
   onContinue: () => void;
 }) {
+  const { language: locale } = useLanguage();
+  const t = useCallback((entry: Translation) => entry[locale], [locale]);
   const slotsRowRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -882,7 +896,7 @@ function SlotStep({
               {t({ en: "Available times", nl: "Beschikbare tijden" })}{" "}
               {selectedDate && (
                 <span className="text-[var(--m-ink)] normal-case tracking-normal font-medium">
-                  · {formatDateShort(selectedDate)}
+                  · {formatDateShort(selectedDate, locale)}
                 </span>
               )}
             </p>
@@ -939,7 +953,7 @@ function SlotStep({
                           : "border-[var(--m-border)] bg-white text-[var(--m-ink)] hover:border-[var(--m-accent)] hover:bg-[var(--m-accent-weak)]")
                       }
                     >
-                      {formatTimeFromStartsAt(slot)}
+                      {formatTimeFromStartsAt(slot, locale)}
                     </motion.button>
                   );
                 })}
@@ -980,6 +994,8 @@ function Calendar({
   selectedDate: string | null;
   onSelectDate: (d: string) => void;
 }) {
+  const { language: locale } = useLanguage();
+  const t = useCallback((entry: Translation) => entry[locale], [locale]);
   const todayKey = toLocalDateKey(new Date());
   const minKey = dateRange[0] ?? todayKey;
   const maxKey = dateRange[dateRange.length - 1] ?? todayKey;
@@ -1184,6 +1200,8 @@ function DetailsStep({
   submitting: boolean;
   error: string | null;
 }) {
+  const { language: locale } = useLanguage();
+  const t = useCallback((entry: Translation) => entry[locale], [locale]);
   const [fieldErrors, setFieldErrors] = useState({ phone: "", email: "" });
 
   const validate = (fieldName: string, value: string) => {
@@ -1218,10 +1236,10 @@ function DetailsStep({
         const key =
           (slot.startsAtLocal && slot.startsAtLocal.split("T")[0]) ||
           slot.startsAt.split("T")[0];
-        return formatDateShort(key);
+        return formatDateShort(key, locale);
       })()
     : "";
-  const timeLabel = slot ? formatTimeFromStartsAt(slot) : "";
+  const timeLabel = slot ? formatTimeFromStartsAt(slot, locale) : "";
 
   const inputClass = (hasError: boolean) =>
     "w-full h-[44px] px-3.5 rounded-xl border font-sans text-[14px] text-[var(--m-ink)] bg-white focus:outline-none focus:ring-2 transition-all placeholder:text-[var(--m-fg-subtle)] " +
@@ -1376,15 +1394,17 @@ function SuccessStep({
   name: string;
   onClose: () => void;
 }) {
+  const { language: locale } = useLanguage();
+  const t = useCallback((entry: Translation) => entry[locale], [locale]);
   const dateLabel = slot
     ? (() => {
         const key =
           (slot.startsAtLocal && slot.startsAtLocal.split("T")[0]) ||
           slot.startsAt.split("T")[0];
-        return formatDateLong(key);
+        return formatDateLong(key, locale);
       })()
     : "";
-  const timeLabel = slot ? formatTimeFromStartsAt(slot) : "";
+  const timeLabel = slot ? formatTimeFromStartsAt(slot, locale) : "";
 
   return (
     <div className="flex flex-col items-center justify-center text-center gap-4 py-2 flex-1">

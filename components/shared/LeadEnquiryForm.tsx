@@ -2,13 +2,11 @@
 "use client";
 
 import { Check, Loader2 } from "lucide-react";
-import { useState, useEffect, type ChangeEvent, type FormEvent } from "react";
+import { useState, useEffect, useCallback, type ChangeEvent, type FormEvent } from "react";
 import CustomSelect from "./CustomSelect";
+import { useLanguage } from "./LanguageProvider";
 
 type Translation = { en: string; nl: string };
-function t(entry: Translation): string {
-  return entry.en;
-}
 
 type LeadEnquiryFormProps = {
   idPrefix?: string;
@@ -66,6 +64,8 @@ export default function LeadEnquiryForm({
   submitButtonBg = DEFAULT_SUBMIT_BG,
   fieldVariant = "boxed",
 }: LeadEnquiryFormProps) {
+  const { language } = useLanguage();
+  const t = useCallback((entry: Translation) => entry[language], [language]);
   const isUnderline = fieldVariant === "underline";
   const baseFieldClass = isUnderline
     ? `w-full bg-transparent border-0 border-b outline-none transition-all font-sans text-[14px] placeholder:text-white/50 ml-1`

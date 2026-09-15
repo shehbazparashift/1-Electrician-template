@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import LenisProvider from "@/components/shared/LenisProvider";
 import { ModalProvider } from "@/components/shared/ModalContext";
+import { LanguageProvider } from "@/components/shared/LanguageProvider";
 import GlobalActions from "@/components/shared/GlobalActions";
 import "./globals.css";
 
@@ -26,12 +27,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body className="bg-background text-foreground">
-        <LenisProvider>
-          <ModalProvider>
-            {children}
-            <GlobalActions />
-          </ModalProvider>
-        </LenisProvider>
+        <LanguageProvider>
+          <LenisProvider>
+            <ModalProvider>
+              {children}
+              <GlobalActions />
+            </ModalProvider>
+          </LenisProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
